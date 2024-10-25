@@ -1,4 +1,4 @@
-# NIDIO-Code
+# NIDIO
 
 Stata code to prepare and analyze Dutch administrative register data in the CBS Microdata RA environment.
 
