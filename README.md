@@ -17,3 +17,7 @@ NIDIO is managed by Christoph Janietz (c.janietz@rug.nl) and Zoltán Lippényi (
 GitHub: github.com/christophjanietz/NIDIO-Code
 
 OSF: osf.io/9b2xh
+
+## Quick Installation Guide
+
+
