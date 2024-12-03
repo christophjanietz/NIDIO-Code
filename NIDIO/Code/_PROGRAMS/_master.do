@@ -12,9 +12,6 @@
 	capture do "${sdir}/_PROGRAMS/labels_nidio" // CJ
 	capture do "${sdir}/_PROGRAMS/source_nidio" // CJ
 	
-	// Merging and combining NIDIO files
-	capture do "${sdir}/_PROGRAMS/partnerbusmatch" // ZL 
-	
 	// Selecting observations in NIDIO files
 	capture do "${sdir}/_PROGRAMS/spolisselect" // CJ
 	capture do "${sdir}/_PROGRAMS/orgsizeselect" // CJ
