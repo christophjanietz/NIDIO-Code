@@ -25,13 +25,13 @@ NIDIO is installed by performing the following steps:
 
 1. Place the NIDIO folder in your project drive (H:/) within the CBS RA environment.
    
-2. Open the do-file install_NIDIO.do. You can find this file in the root directory ../NIDIO/ of the NIDIO file tree. Your working directory in STATA must be identical to the NIDIO root directory.
+2. Open the do-file *install_NIDIO.do*. You can find this file in the root directory **../NIDIO/** of the NIDIO file tree. Your working directory in STATA must be identical to the NIDIO root directory.
    
-3. Execute the do-file install_NIDIO.do. Running the lines 10 and 11 of the do-file is mandatory. Executing these lines will locate and call the source data within the CBS RA environment. You can customize the rest of your installation by using the command install_nidio together with one specified NIDIO module you wish to install.\footnote{The lines 17 to 28 of the do-file For example, to install the module 'ABR', execute: install_nidio ABR
+3. Execute the do-file *install_NIDIO.do*. Running the lines 10 and 11 of the do-file is mandatory. Executing these lines will locate and call the source data within the CBS RA environment. You can customize the rest of your installation by using the command install_nidio together with one specified NIDIO module you wish to install. For example, to install the module 'ABR', execute: install_nidio ABR
    
 4. NIDIO will now be busy processing the CBS source data. This can take between 1 minute (module 'PARTNER') to 4 days (96 hours) (module 'SPOLIS_YEAR') depending on the selected module.
    
-5. You will receive a notification in the STATA results window, when the installation of the module is complete. You can find the ready-to-use datasets in the corresponding folder under the file path ../NIDIO/Data/[Module]/ after completion. 
+5. You will receive a notification in the STATA results window, when the installation of the module is complete. You can find the ready-to-use datasets in the corresponding folder under the file path **../NIDIO/Data/[Module]/** after completion. 
 
 ## Installing NIDIO within the CBS RA Environment
 There are two ways to install NIDIO within the CBS RA Environment:
