@@ -20,13 +20,17 @@ NIDIO achieves these aims by addressing three challenges that are commonly encou
 
 NIDIO is managed by Christoph Janietz (c.janietz@rug.nl) and Zoltán Lippényi (z.lippenyi@rug.nl) at the University of Groningen. The NIDIO code was developed by Christoph Janietz and Zoltán Lippényi as part of the NWO-funded project "Beyond Boardrooms".
 
-## Quick Installation Guide
+## Quick Installation Guide within the CBS RA Environment
 NIDIO is installed by performing the following steps:
 
-1.Place the NIDIO folder in your project drive (H:/) within the CBS RA environment.
-2. Open the do-file install_NIDIO.do. You can find this file in the root directory ../NIDIO/ of the NIDIO file tree. Your working directory in STATA must be identical to the NIDIO root directory. 
+1. Place the NIDIO folder in your project drive (H:/) within the CBS RA environment.
+   
+2. Open the do-file install_NIDIO.do. You can find this file in the root directory ../NIDIO/ of the NIDIO file tree. Your working directory in STATA must be identical to the NIDIO root directory.
+   
 3. Execute the do-file install_NIDIO.do. Running the lines 10 and 11 of the do-file is mandatory. Executing these lines will locate and call the source data within the CBS RA environment. You can customize the rest of your installation by using the command install_nidio together with one specified NIDIO module you wish to install.\footnote{The lines 17 to 28 of the do-file For example, to install the module 'ABR', execute: install_nidio ABR
-4. NIDIO will now be busy processing the CBS source data. This can take between 1 minute (module 'PARTNER') to 4 days (96 hours) (module 'SPOLIS_YEAR') depending on the selected module. 
+   
+4. NIDIO will now be busy processing the CBS source data. This can take between 1 minute (module 'PARTNER') to 4 days (96 hours) (module 'SPOLIS_YEAR') depending on the selected module.
+   
 5. You will receive a notification in the STATA results window, when the installation of the module is complete. You can find the ready-to-use datasets in the corresponding folder under the file path ../NIDIO/Data/[Module]/ after completion. 
 
 ## Installing NIDIO within the CBS RA Environment
@@ -36,7 +40,7 @@ There are two ways to install NIDIO within the CBS RA Environment:
 
 Users may then contact CBS [microdata@cbs.nl](mailto:microdata@cbs.nl) to request an import of the NIDIO zip folder into their RA project environment.
     
-3. **ODISSEI Storage Facility within the CBS Remote Environment.** The very large NIDIO datasets **nidio\_spolis\_month\_2006\_2023.dta** and **nidio\_spolis\_month\_2006\_2023.dta** will also be stored directly within the RA environment via the ODISSEI Storage Facility. Researchers at ODISSEI member organisations can request access to these files in their own RA projects (which is free of charge). Projects intending to use these NIDIO datasets need to have access to the original CBS microdata topic (SPOLIS) in their project. The usual fee for accessing the data applies. We expect these files to be available by January 2025. 
+2. **ODISSEI Storage Facility within the CBS Remote Environment.** The very large NIDIO datasets **nidio\_spolis\_month\_2006\_2023.dta** and **nidio\_spolis\_month\_2006\_2023.dta** will also be stored directly within the RA environment via the ODISSEI Storage Facility. Researchers at ODISSEI member organisations can request access to these files in their own RA projects (which is free of charge). Projects intending to use these NIDIO datasets need to have access to the original CBS microdata topic (SPOLIS) in their project. The usual fee for accessing the data applies. We expect these files to be available by January 2025. 
 
 ### Licence Apache-2
 Copyright NIDIO Christoph Janietz 
