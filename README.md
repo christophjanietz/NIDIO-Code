@@ -33,7 +33,7 @@ NIDIO is installed by performing the following steps:
    
 5. You will receive a notification in the STATA results window, when the installation of the module is complete. You can find the ready-to-use datasets in the corresponding folder under the file path **../NIDIO/Data/[Module]/** after completion. 
 
-## Installing NIDIO within the CBS RA Environment
+## Importing NIDIO into the CBS RA Environment
 There are two ways to install NIDIO within the CBS RA Environment:
 
 1. **Download NIDIO as a zip folder from the OSF repository.** The NIDIO code can be retrieved at [https://osf.io/9b2xh/](https://osf.io/9b2xh/). This OSF repository is intended as the main gateway for the distribution of NIDIO. The OSF repository is synchronized with a [GitHub repository](https://github.com/christophjanietz/NIDIO-Code) in which the code is hosted and maintained. It is recommended to download the whole NIDIO folder as a zip via the OSF repository (see Figure \ref{fig:download}).
