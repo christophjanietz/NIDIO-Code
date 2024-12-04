@@ -3,7 +3,7 @@
 *==============================================================================*
  	Project: NIDIO
 	Author: Christoph Janietz (c.janietz@rug.nl)
-	Last update: 23-10-2024
+	Last update: 02-12-2024
 * ---------------------------------------------------------------------------- */
 
 * This do-file has the following purpose:
@@ -55,11 +55,10 @@
 	global sPARTNER		"${sdir}/PARTNERBUS"	  	// Partner (individual)
 	global sSPOLIS		"${sdir}/SPOLISBUS"	  		// SPOLIS (job)
 	
+*** User-written commands
+
 	// NIDIO Stata commands
 	do "${sdir}/_PROGRAMS/_master"
-	
-	// CPI data
-	do "${sdir}/_AUXILIARY/CPI/CPI"
 
 ***	Locating source data
 	
@@ -301,18 +300,13 @@
 	// (Use .dta format for (S)POLIS to be able to drop variables while loading 
 	// datasets.)
 	foreach year of num 2006/2009 {
-	   local polis`year': dir "G:/Polis/POLISBUS/`year'/geconverteerde data/" files "POLISBUS`year'V*.dta"
-	   global polis`year' =  "G:/Polis/POLISBUS/`year'/geconverteerde data/" + `polis`year''
+	   local polis`year': dir "G:/Polis/POLISBUS/Geconverteerdedata/" files "POLISBUS`year'V*.dta"
+	   global polis`year' =  "G:/Polis/POLISBUS/Geconverteerdedata/" + `polis`year''
 	}
 	*
-	foreach year of num 2010/2013 2016/2024 {
-	   local spolis`year': dir "G:/Spolis/SPOLISBUS/`year'/geconverteerde data/" files "SPOLISBUS`year'V*.dta"
-	   global spolis`year' =  "G:/Spolis/SPOLISBUS/`year'/geconverteerde data/" + `spolis`year''
-	}
-	*
-	foreach year of num 2014/2015 {
-	   local spolis`year': dir "G:/Spolis/SPOLISBUS/`year'/geconverteerde data/" files "SPOLISBUS `year'V*.dta"
-	   global spolis`year' =  "G:/Spolis/SPOLISBUS/`year'/geconverteerde data/" + `spolis`year''
+	foreach year of num 2010/2023 {
+	   local spolis`year': dir "G:/Spolis/SPOLISBUS/Geconverteerdedata/" files "SPOLISBUS`year'V*.dta"
+	   global spolis`year' =  "G:/Spolis/SPOLISBUS/Geconverteerdedata/" + `spolis`year''
 	}
 	*
 	
@@ -336,18 +330,32 @@
 
 	// Auxiliary files
 	capture mkdir "${sdir}/_AUXILIARY/EDU"
-	local OPLNR: dir "K:/Utilities/Code_Listings/SSBreferentiebestanden/geconverteerde data/" ///
+	local OPLNR: dir "K:/Utilities/Code_Listings/SSBreferentiebestanden/geconverteerdedata/" ///
 		files "OPLEIDINGSNRREFV*.dta"
-	global OPLNR = "K:/Utilities/Code_Listings/SSBreferentiebestanden/geconverteerde data/" + `OPLNR'
+	global OPLNR = "K:/Utilities/Code_Listings/SSBreferentiebestanden/geconverteerdedata/" + `OPLNR'
 	
-	local CTO: dir "K:/Utilities/Code_Listings/SSBreferentiebestanden/geconverteerde data/" ///
+	local CTO: dir "K:/Utilities/Code_Listings/SSBreferentiebestanden/geconverteerdedata/" ///
 		files "CTOREFV*.dta"
-	global CTO = "K:/Utilities/Code_Listings/SSBreferentiebestanden/geconverteerde data/" + `CTO'
+	global CTO = "K:/Utilities/Code_Listings/SSBreferentiebestanden/geconverteerdedata/" + `CTO'
 	
-	local CNTRY: dir "K:/Utilities/Code_Listings/SSBreferentiebestanden/geconverteerde data/" ///
+	local CNTRY: dir "K:/Utilities/Code_Listings/SSBreferentiebestanden/geconverteerdedata/" ///
 		files "LANDAKTUEELREFV*.dta"
-	global CNTRY = "K:/Utilities/Code_Listings/SSBreferentiebestanden/geconverteerde data/" + `CNTRY'
+	global CNTRY = "K:/Utilities/Code_Listings/SSBreferentiebestanden/geconverteerdedata/" + `CNTRY'
+	
+	local CAO: dir "K:/Utilities/HULPbestanden/BEDRIJFSTAKCAO/" ///
+		files "BEDRIJFSTAKCAOV*.sav"
+	global CAO = "K:/Utilities/HULPbestanden/BEDRIJFSTAKCAO/" + `CAO'
 	
 	global cntry_nidio "${sdir}/_AUXILIARY/Country_codes/wrldrgn_nidio.dta"
 	global CPI "${sdir}/_AUXILIARY/CPI/CPI.dta"
 	global CPI_month "${sdir}/_AUXILIARY/CPI/CPI_month.dta"
+	
+*** Auxiliary
+	
+	// CPI data
+	do "${sdir}/_AUXILIARY/CPI/CPI"
+	
+	// Bedrijfstak-CAO codes
+	do "${sdir}/_AUXILIARY/CAO/CAO"
+	
+	
