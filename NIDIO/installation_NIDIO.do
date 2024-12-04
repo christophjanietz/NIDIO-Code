@@ -3,7 +3,7 @@
 *==============================================================================*
  	Project: NIDIO
 	Author: Christoph Janietz (c.janietz@rug.nl)
-	Last update: 25-10-2024
+	Last update: 02-12-2024
 * ---------------------------------------------------------------------------- */
 
 *** Run configuration file (from current file path)
@@ -51,8 +51,8 @@
 	* - PARTNERBUS: Partnership (1 dataset; 644 MB)
 	
 	* JOB LEVEL:
-	* - SPOLIS_MONTH: Jobs existing in September during reference year (1 dataset; 32.7 GB)
-	* - SPOLIS_YEAR: All jobs existing during reference year (1 dataset; 45.1 GB)
+	* - SPOLIS_MONTH: Jobs existing in September during reference year (1 dataset;)
+	* - SPOLIS_YEAR: All jobs existing during reference year (1 dataset;)
 	
 	*--------------------------------------------------------------------------*
 	* Dependencies: SPOLIS is required for the installation of module 'ABR'.
