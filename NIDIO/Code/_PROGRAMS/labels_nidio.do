@@ -3,7 +3,7 @@
 *==============================================================================*
  	Project: NIDIO
 	Author: Christoph Janietz (c.janietz@rug.nl)
-	Last update: 26-02-2024
+	Last update: 02-12-2024
 * ---------------------------------------------------------------------------- *
 
 	INDEX:  
@@ -405,7 +405,8 @@ program define labels_nidio
 			capture lab var spolisdienstverband "Full-time / part-time employment" 
 			capture lab var swekarbduurklasse "Working time category"
 			capture lab var scaosector "CAO sector"
-			capture lab var caocode "CAO code"
+			capture lab var scao_crypt "Encrypted CAO code"
+			capture lab var caocode "Decrypted Bedrijstak-CAO code"
 			capture lab var cao "CAO status"
 			capture lab var ssoortbaan "Job type"
 			capture lab var job_start_caly "Starting date job within calendar year"
@@ -453,7 +454,8 @@ program define labels_nidio
 			capture lab def scaosector_lbl 1 "Private" 2 "Non-profit" 3 "Government", replace
 			capture lab val scaosector scaosector_lbl
 	
-			capture lab def cao_lbl 0 "No or firm-level collective agreement" 1 "Sectoral agreement", replace
+			capture lab def cao_lbl 0 "No collective agreement" ///
+				1 "Sectoral agreement" 2 "Firm-level agreement", replace
 			capture lab val cao cao_lbl
 	
 			capture lab def ssoortbaan_lbl 1 "Director / Large shareholder" 2 "Intern" ///
