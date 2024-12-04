@@ -3,7 +3,7 @@
 *==============================================================================*
  	Project: NIDIO
 	Author: Christoph Janietz (c.janietz@rug.nl)
-	Last update: 28-10-2024
+	Last update: 02-12-2024
 * ---------------------------------------------------------------------------- *
 
 	INDEX: 
@@ -25,48 +25,24 @@
 
 	*POLIS
 	foreach year of num 2006/2009 {
-		if `year'==2006 {
-			use rinpersoons rinpersoon baanrugid aanvbus eindbus baandagen basisloon ///
+		use rinpersoons rinpersoon baanrugid aanvbus eindbus baandagen basisloon ///
 			basisuren bijzonderebeloning extrsal incidentsal lningld lnowrk ///
 			overwerkuren vakbsl voltijddagen contractsoort polisdienstverband ///
 			beid caosector datumaanvangikv datumeindeikv soortbaan reguliereuren ///
-			wekarbduurklasse datumaanvangikvorg bedrijfstakcao ///
+			wekarbduurklasse datumaanvangikvorg CAO_crypt ///
 			using "${polis`year'}", replace
 			
-			rename _all, lower
-		
-			*Harmonize variable names
-			foreach var of var baandagen basisloon basisuren bijzonderebeloning ///
-			extrsal incidentsal lningld lnowrk overwerkuren vakbsl voltijddagen ///
-			contractsoort polisdienstverband beid caosector datumaanvangikv ///
-			datumeindeikv soortbaan reguliereuren wekarbduurklasse ///
-			datumaanvangikvorg{
-				rename `var' s`var' 
-			}
-			rename (aanvbus eindbus) (sdatumaanvangiko sdatumeindeiko)
-		}
-		*
-		else {
-			use rinpersoons rinpersoon baanrugid aanvbus eindbus baandagen basisloon ///
-			basisuren bijzonderebeloning extrsal incidentsal lningld lnowrk ///
-			overwerkuren vakbsl voltijddagen contractsoort polisdienstverband ///
-			beid caosector datumaanvangikv datumeindeikv soortbaan reguliereuren ///
-			wekarbduurklasse datumaanvangikvorg BedrijfstakCAO ///
-			using "${polis`year'}", replace
-			
-			rename _all, lower
+		rename _all, lower
 		
 		*Harmonize variable names
-			foreach var of var baandagen basisloon basisuren bijzonderebeloning ///
+		foreach var of var baandagen basisloon basisuren bijzonderebeloning ///
 			extrsal incidentsal lningld lnowrk overwerkuren vakbsl voltijddagen ///
 			contractsoort polisdienstverband beid caosector datumaanvangikv ///
 			datumeindeikv soortbaan reguliereuren wekarbduurklasse ///
-			datumaanvangikvorg{
+			datumaanvangikvorg cao_crypt{
 				rename `var' s`var' 
 			}
-			rename (aanvbus eindbus) (sdatumaanvangiko sdatumeindeiko)
-		}
-		*
+		rename (aanvbus eindbus) (sdatumaanvangiko sdatumeindeiko)
 		
 		// Keep only workers registered in GBR
 		keep if rinpersoons=="R"
@@ -142,10 +118,14 @@
 		* CAO
 		destring scaosector, replace
 		recode scaosector (1000 = 1) (2000 = 2) (3000/3800 = 3)
-		rename bedrijfstakcao caocode 
+		recast str32 scao_crypt
+		sort scao_crypt
+		merge m:1 scao_crypt using "${BedrijfstakCAO}", keep(master match) ///
+			nogen keepusing(cao)
+		rename cao caocode
 		destring caocode, gen(cao)
-		recode cao (9999=0) (1/9998=1)
-		order caocode cao, after(scaosector)
+		recode cao (9999=0) (1/9998=1) (.=2)
+		order scao_crypt caocode cao, after(scaosector)
 		
 		gsort rinpersoon baanrugid
 		
@@ -255,28 +235,14 @@
 
 
 	foreach year of num 2010/2023 {
-		if `year'<=2012 {
-			use RINPERSOONS RINPERSOON IKVID SDATUMAANVANGIKO SDATUMEINDEIKO ///
-			SBAANDAGEN SBASISLOON SBASISUREN SBIJZONDEREBELONING SEXTRSAL ///
-			SINCIDENTSAL SLNINGLD SLNOWRK SOVERWERKUREN SVAKBSL SVOLTIJDDAGEN ///
-			SCONTRACTSOORT SPOLISDIENSTVERBAND SBEID SCAOSECTOR SDATUMAANVANGIKV ///
-			SDATUMEINDEIKV SSOORTBAAN SREGULIEREUREN SWEKARBDUURKLASSE ///
-			SDATUMAANVANGIKVORG BedrijfstakCAO using "${spolis`year'}", replace 
-			
-		rename _all, lower
-		}
-		*
-		else {
-			use rinpersoons rinpersoon ikvid sdatumaanvangiko sdatumeindeiko sbaandagen ///
+		use rinpersoons rinpersoon ikvid sdatumaanvangiko sdatumeindeiko sbaandagen ///
 			sbasisloon sbasisuren sbijzonderebeloning sextrsal sincidentsal slningld ///
 			slnowrk soverwerkuren svakbsl svoltijddagen scontractsoort spolisdienstverband ///
 			sbeid scaosector sdatumaanvangikv sdatumeindeikv ssoortbaan sreguliereuren ///
-			swekarbduurklasse sdatumaanvangikvorg BedrijfstakCAO using ///
+			swekarbduurklasse sdatumaanvangikvorg SCAO_crypt using ///
 			"${spolis`year'}", replace
 			
 		rename _all, lower
-		}
-		*
 	
 		// Keep only workers registered in GBR
 		keep if rinpersoons=="R"
@@ -352,10 +318,14 @@
 		* CAO
 		destring scaosector, replace
 		recode scaosector (1000 = 1) (2000 = 2) (3000/3800 = 3)
-		rename bedrijfstakcao caocode 
+		recast str32 scao_crypt
+		sort scao_crypt
+		merge m:1 scao_crypt using "${BedrijfstakCAO}", keep(master match) ///
+			nogen keepusing(cao)
+		rename cao caocode
 		destring caocode, gen(cao)
-		recode cao (9999=0) (1/9998=1)
-		order caocode cao, after(scaosector)
+		recode cao (9999=0) (1/9998=1) (.=2)
+		order scao_crypt caocode cao, after(scaosector)
 		
 		gsort rinpersoon ikvid
 		
