@@ -3,7 +3,7 @@
 *==============================================================================*
  	Project: NIDIO
 	Author: Christoph Janietz (c.janietz@rug.nl)
-	Last update: 02-12-2024
+	Last update: 05-12-2024
 * ---------------------------------------------------------------------------- *
 
 	INDEX: 
@@ -115,9 +115,7 @@
 		merge m:1 scao_crypt using "${BedrijfstakCAO}", keep(master match) ///
 			nogen keepusing(cao)
 		rename cao caocode
-		destring caocode, gen(cao)
-		recode cao (9999=0) (1/9998=1) (.=2)
-		order scao_crypt caocode cao, after(scaosector)
+		order scao_crypt caocode, after(scaosector)
 		
 		gsort rinpersoon baanrugid
 		
@@ -294,9 +292,7 @@
 		merge m:1 scao_crypt using "${BedrijfstakCAO}", keep(master match) ///
 			nogen keepusing(cao)
 		rename cao caocode
-		destring caocode, gen(cao)
-		recode cao (9999=0) (1/9998=1) (.=2)
-		order scao_crypt caocode cao, after(scaosector)
+		order scao_crypt caocode, after(scaosector)
 		
 		gsort rinpersoon ikvid
 		
