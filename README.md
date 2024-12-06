@@ -1,4 +1,4 @@
-# NIDIO - Netherlands Integrated Database of Inequality in Organizations
+# NIDIO - Netherlands Integrated Data Infrastructure of Inequality in Organizations
 
 Stata code to prepare and analyze Dutch administrative register data in the CBS Microdata RA environment.
 
