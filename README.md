@@ -18,7 +18,7 @@ NIDIO achieves these aims by addressing three challenges that are commonly encou
 2. Users with limited prior experience working with linked employer-employee register data face high startup barriers during project setup. NIDIO eases time- and labor-intensive data processing by providing tailor-made and customizable installation tools.
 3. Translating administrative data into social science concepts and measures is a nontrivial task. NIDIO provides guidelines and best practices to bridge the gap between administrative and scientific data.
 
-NIDIO is managed by Christoph Janietz (c.janietz@rug.nl) and Zoltán Lippényi (z.lippenyi@rug.nl) at the University of Groningen. The NIDIO code was developed by Christoph Janietz and Zoltán Lippényi as part of the NWO-funded project "Beyond Boardrooms".
+NIDIO is managed by Christoph Janietz (c.janietz@rug.nl) and Zoltán Lippényi (z.lippenyi@rug.nl) at the University of Groningen. The NIDIO code was developed by Christoph Janietz and Zoltán Lippényi as part of the NWO-funded project "Beyond Boardrooms". This research was funded by an NWO Talent Scheme VIDI grant (project number: VI.Vidi.211.231).
 
 ## Quick Installation Guide within the CBS RA Environment
 NIDIO is installed by performing the following steps:
@@ -40,7 +40,7 @@ There are two ways to install NIDIO within the CBS RA Environment:
 
 Users may then contact CBS [microdata@cbs.nl](mailto:microdata@cbs.nl) to request an import of the NIDIO zip folder into their RA project environment.
     
-2. **ODISSEI Storage Facility within the CBS Remote Environment.** The very large NIDIO datasets **nidio\_spolis\_month\_2006\_2023.dta** and **nidio\_spolis\_month\_2006\_2023.dta** will also be stored directly within the RA environment via the ODISSEI Storage Facility. Researchers at ODISSEI member organisations can request access to these files in their own RA projects (which is free of charge). Projects intending to use these NIDIO datasets need to have access to the original CBS microdata topic (SPOLIS) in their project. The usual fee for accessing the data applies. We expect these files to be available by January 2025. 
+2. **ODISSEI Storage Facility within the CBS Remote Environment.** The very large NIDIO datasets **nidio\_spolis\_month\_2006\_2023.dta** (doi: [10.34894/YQIIQV](https://portal.odissei.nl/dataset.xhtml?persistentId=doi:10.34894/YQIIQV)) and **nidio\_spolis\_month\_2006\_2023.dta** (doi: [10.34894/63XWJB](https://portal.odissei.nl/dataset.xhtml?persistentId=doi:10.34894/63XWJB)) will also be stored directly within the RA environment via the ODISSEI Storage Facility. Researchers at ODISSEI member organisations can request access to these files in their own RA projects (which is free of charge). Projects intending to use these NIDIO datasets need to have access to the original CBS microdata topic (SPOLIS) in their project. The usual fee for accessing the data applies. We expect these files to be available by January 2025. 
 
 ### Licence Apache-2
 Copyright NIDIO Christoph Janietz 
