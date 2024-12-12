@@ -18,7 +18,7 @@ NIDIO achieves these aims by addressing three challenges that are commonly encou
 2. Users with limited prior experience working with linked employer-employee register data face high startup barriers during project setup. NIDIO eases time- and labor-intensive data processing by providing tailor-made and customizable installation tools.
 3. Translating administrative data into social science concepts and measures is a nontrivial task. NIDIO provides guidelines and best practices to bridge the gap between administrative and scientific data.
 
-NIDIO is managed by Christoph Janietz (c.janietz@rug.nl) and Zoltán Lippényi (z.lippenyi@rug.nl) at the University of Groningen. The NIDIO code was developed by Christoph Janietz and Zoltán Lippényi as part of the NWO-funded project "Beyond Boardrooms". This research was funded by an NWO Talent Scheme VIDI grant (project number: VI.Vidi.211.231).
+NIDIO is managed by Christoph Janietz (c.janietz@rug.nl) and Zoltán Lippényi (z.lippenyi@rug.nl) at the University of Groningen. The NIDIO code was developed by Christoph Janietz and Zoltán Lippényi as part of the NWO-funded project "Beyond Boardrooms". This research was funded by an NWO Talent Scheme VIDI grant (project number: [VI.Vidi.211.231](https://www.nwo.nl/en/projects/vividi211231)).
 
 ## Quick Installation Guide within the CBS RA Environment
 NIDIO is installed by performing the following steps:
