@@ -3,7 +3,7 @@
 *==============================================================================*
  	Project: NIDIO
 	Author: Christoph Janietz (c.janietz@rug.nl)
-	Last update: 02-12-2024
+	Last update: 13-12-2024
 * ---------------------------------------------------------------------------- *
 
 	INDEX:  
@@ -424,7 +424,7 @@ program define labels_nidio
 			capture lab var sreguliereuren_month "Regular working hours (September)"
 			capture lab var svakbsl_month "Holiday allowance (September)"
 			capture lab var svoltijddagen_month "Full-time days (September)"
-			capture lab var ft_factor "Full-time factor"
+			capture lab var ft_factor "Full-time equivalent"
 			capture lab var mainjob "Main job (most total pay)"
 	
 			capture lab var sbaandagen_year "Job days (Calendar year)"
