@@ -30,7 +30,7 @@
 	*--------------------------------------------------------------------------*
 	* The command installation_nidio will process CBS source data and generate 
 	* NIDIO datasets in the folder "Data".
-	* (See NIDIO_datasets.xlsx for a complete overview of available NIDIO datasets)
+	* (See the NIDIO manual for a complete overview of available NIDIO datasets)
 	*--------------------------------------------------------------------------*
 	
 	* The user needs to specify one MODULE with the install_nidio command. 
