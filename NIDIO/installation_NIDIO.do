@@ -52,7 +52,7 @@
 	
 	* JOB LEVEL:
 	* - SPOLIS_MONTH: Jobs existing in September during reference year (1 dataset; 37.1 GB)
-	* - SPOLIS_YEAR: All jobs existing during reference year (1 dataset;)
+	* - SPOLIS_YEAR: All jobs existing during reference year (1 dataset; 50.8 GB)
 	
 	*--------------------------------------------------------------------------*
 	* Dependencies: SPOLIS is required for the installation of module 'ABR'.
