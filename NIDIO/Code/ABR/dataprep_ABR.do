@@ -111,6 +111,17 @@
 		year[_n+1]==2018 & (og_ownership!=og_ownership[_n+1])
 	bys ogid: replace og_sectorcode = og_sectorcode[_n+1] if year==2017 & ///
 		year[_n+1]==2018 & (og_sectorcode!=og_sectorcode[_n+1])
+
+	// Coding break in sector code after 2016
+	// Solution: Alternative variable that holds consistent codes within OG unit
+	gsort ogid year
+	gen og_sector_alt = og_sector
+	foreach code of num 11 12 13 15 {
+		bys ogid: replace og_sector_alt = og_sector_alt[_n-1] ///
+			if year>=2017 & year==year[_n-1]+1 & og_sector_alt[_n-1]==`code'
+	}
+	*
+	order og_sector_alt, after(og_sector)
 		
 	// Labeling
 	labels_nidio, module(abr)
