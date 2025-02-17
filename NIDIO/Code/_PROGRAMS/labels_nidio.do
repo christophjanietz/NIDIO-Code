@@ -38,6 +38,7 @@ program define labels_nidio
 			capture lab var ogid "OG ID"
 			capture lab var og_sectorcode "Coordinated sector code of OG"
 			capture lab var og_sector "Harmonized and simplified sector code"
+			capture lab var og_sector_alt "Longitudinally consistent sector code (2017-)"
 			capture lab var og_ownership "OG ownership (non-financial firms & financial institutions)"
 			capture lab var og_nrofvep "Number of CBS persoonen attached to OG"
 			capture lab var og_employees "Number of employees in calendar year (aggregated from BE level)"
@@ -81,6 +82,7 @@ program define labels_nidio
 				13 "Governmental organization" 14 "Households" ///
 				15 "Non-governmental non-profit organization", replace
 			capture lab val og_sector og_sector_lbl
+			capture lab val og_sector_alt og_sector_lbl
 	
 			capture lab def og_ownership_lbl 0 "n.a." 1 "Public" 2 "Private" 3 "Foreign", replace
 			capture lab val og_ownership og_ownership_lbl
