@@ -3,7 +3,7 @@
 *==============================================================================*
  	Project: NIDIO
 	Author: Christoph Janietz (c.janietz@rug.nl)
-	Last update: 23-10-2024
+	Last update: 17-02-2025
 * ---------------------------------------------------------------------------- *
 
 	INDEX: 
@@ -38,27 +38,7 @@
 	}
 	*
 	
-	foreach year of num 2010/2012 {
-		
-		use SBEID using "${spolis`year'}", replace
-		
-		rename SBEID beid
-		
-		gduplicates drop beid, force
-		
-		// Add calendar year
-		gen year = `year'
-		order year, before(beid)
-		
-		sort year beid
-	
-		// Save temporary file
-		tempfile temp_beid`year'
-		save `temp_beid`year''
-	}
-	*
-	
-	foreach year of num 2013/2023 {
+	foreach year of num 2010/2023 {
 		
 		use sbeid using "${spolis`year'}", replace
 		
