@@ -280,7 +280,7 @@ program define labels_nidio
 			9014 "Leeward Islands" 9015 "Windward Islands" ///
 			9016 "French Territory of the Afars and the Issas" ///
 			9020 "Portuguese Guinea" 9022 "German South West Africa" 9023 "Namibia" ///
-			9027 "British Somaliland" 9028 "Italian Somaliland" 9030 "Dutch India" ///
+			9027 "British Somaliland" 9028 "Italian Somaliland" 9030 "Dutch East Indies" ///
 			9031 "British Guiana" 9036 "Swaziland" 9037 "Qatar" 9041 "Aden Colony" ///
 			9042 "Federation of South Arabia" 9043 "Equatorial Guinea" 9044 "Spanish Guinea" ///
 			9047 "United Arab Republic" 9048 "Bermuda" 9049 "Soviet Union" 9050 "German East Africa" ///
