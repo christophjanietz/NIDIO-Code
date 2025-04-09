@@ -3,7 +3,7 @@
 *==============================================================================*
  	Project: NIDIO
 	Author: Christoph Janietz (c.janietz@rug.nl)
-	Last update: 02-12-2024
+	Last update: 09-04-2025
 * ---------------------------------------------------------------------------- */
 
 * This do-file has the following purpose:
@@ -342,9 +342,9 @@
 		files "LANDAKTUEELREFV*.dta"
 	global CNTRY = "K:/Utilities/Code_Listings/SSBreferentiebestanden/geconverteerdedata/" + `CNTRY'
 	
-	local CAO: dir "K:/Utilities/HULPbestanden/BEDRIJFSTAKCAO/" ///
-		files "BEDRIJFSTAKCAOV*.sav"
-	global CAO = "K:/Utilities/HULPbestanden/BEDRIJFSTAKCAO/" + `CAO'
+	local CAO: dir "K:/Utilities/Code_Listings/SSBreferentiebestanden/" ///
+		files "CAOSOORTREF*.sav"
+	global CAO = "K:/Utilities/Code_Listings/SSBreferentiebestanden/" + `CAO'
 	
 	global cntry_nidio "${sdir}/_AUXILIARY/Country_codes/wrldrgn_nidio.dta"
 	global CPI "${sdir}/_AUXILIARY/CPI/CPI.dta"
