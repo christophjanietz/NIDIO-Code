@@ -6,7 +6,7 @@ Version: V1.0.2
 
 GitHub: [github.com/christophjanietz/NIDIO-Code](github.com/christophjanietz/NIDIO-Code)
 
-OSF: [osf.io/9b2xh](osf.io/9b2xh)
+OSF: [osf.io/9b2xh](https://www.osf.io/9b2xh)
 
 ## NIDIO in short
 
