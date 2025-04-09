@@ -3,11 +3,11 @@
 *==============================================================================*
  	Project: NIDIO
 	Author: Christoph Janietz (c.janietz@rug.nl)
-	Last update: 05-12-2024
+	Last update: 09-04-2025
 * ---------------------------------------------------------------------------- *
 
 	INDEX: 
-		1. 	POLIS (2006-2009)
+		1.  POLIS (2006-2009)
 		2.  SPOLIS (2010- ) 
 		3.  APPEND YEARLY FILES
 		
@@ -113,9 +113,11 @@
 		recast str32 scao_crypt
 		sort scao_crypt
 		merge m:1 scao_crypt using "${BedrijfstakCAO}", keep(master match) ///
-			nogen keepusing(cao)
-		rename cao caocode
-		order scao_crypt caocode, after(scaosector)
+			nogen keepusing(caosoortgrp1)
+		rename caosoortgrp1 cao
+		destring cao
+		recode cao (0=0) (1=1) (2=2) (9=.)
+		order scao_crypt cao, after(scaosector)
 		
 		gsort rinpersoon baanrugid
 		
@@ -290,9 +292,11 @@
 		recast str32 scao_crypt
 		sort scao_crypt
 		merge m:1 scao_crypt using "${BedrijfstakCAO}", keep(master match) ///
-			nogen keepusing(cao)
-		rename cao caocode
-		order scao_crypt caocode, after(scaosector)
+			nogen keepusing(caosoortgrp1)
+		rename caosoortgrp1 cao
+		destring cao
+		recode cao (0=0) (1=1) (2=2) (9=.)
+		order scao_crypt cao, after(scaosector)
 		
 		gsort rinpersoon ikvid
 		
