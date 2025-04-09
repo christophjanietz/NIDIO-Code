@@ -3,7 +3,7 @@
 *==============================================================================*
  	Project: NIDIO
 	Author: Christoph Janietz (c.janietz@rug.nl)
-	Last update: 17-02-2025
+	Last update: 09-04-2025
 * ---------------------------------------------------------------------------- *
 
 	INDEX:  
@@ -408,7 +408,6 @@ program define labels_nidio
 			capture lab var swekarbduurklasse "Working time category"
 			capture lab var scaosector "CAO sector"
 			capture lab var scao_crypt "Encrypted CAO code"
-			capture lab var caocode "Decrypted Bedrijstak-CAO code"
 			capture lab var cao "CAO status"
 			capture lab var ssoortbaan "Job type"
 			capture lab var job_start_caly "Starting date of job within calendar year"
