@@ -3,7 +3,7 @@
 *==============================================================================*
  	Project: NIDIO
 	Author: Christoph Janietz (c.janietz@rug.nl)
-	Last update: 23-10-2024
+	Last update: 09-04-2025
 * ---------------------------------------------------------------------------- *
 
 	INDEX: 
@@ -11,9 +11,9 @@
 		
 * Short description of output:
 *
-* - Occupation codes based on NEA 2006-2022
+* - Occupation codes based on NEA 2006-2023
 *
-* nidio_nea_occ_2006_2022: 
+* nidio_nea_occ_2006_2023: 
 * Respondent's occupation (ISCO-08) as collected by NEA survey. Before 2011, NEA
 * collected occupations only based on an idiosyncratic questionnaire item. 
 * Starting from 2011, ISCO-08 are available (Unit: RIN-years).
@@ -47,9 +47,9 @@
 	save "${dNEA}/temp_occ_0613", replace
 	
 	
-	// 2014-2022
+	// 2014-2023
 	* Load dataset
-	import spss using "${nea1422}", case(lower) clear
+	import spss using "${nea1423}", case(lower) clear
 	
 	* Select variables
 	keep rinpersoon jaar weeg isco08_unitgroup
@@ -68,7 +68,7 @@
 	order rin_neaocc, after(rin_ISCO08)
 	
 	
-	// Append files to create yearly NEA occupation database 2006-2022
+	// Append files to create yearly NEA occupation database 2006-2023
 	append using "${dNEA}/temp_occ_0613"
 	
 	* Remove original occupation label
@@ -82,7 +82,7 @@
 	
 	gsort year rinpersoon
 	
-	save "${dNEA}/nidio_nea_occ_2006_2022", replace	
+	save "${dNEA}/nidio_nea_occ_2006_2023", replace	
 	
 	*Delete temporary files
 	erase "${dNEA}/temp_occ_0613.dta"
