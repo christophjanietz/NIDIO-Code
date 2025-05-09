@@ -3,7 +3,7 @@
 *==============================================================================*
  	Project: NIDIO
 	Author: Christoph Janietz (c.janietz@rug.nl)
-	Last update: 23-10-2024
+	Last update: 09-04-2025
 * ---------------------------------------------------------------------------- *
 
 	INDEX: 
@@ -14,18 +14,18 @@
 *
 * - Longitudinal financial data files
 *
-* nidio_nfo_finances_2006_2022: 
+* nidio_nfo_finances_2006_2023: 
 * Financial data including fully appended source files.
 *
-* nidio_nfo_og_2006_2022: 
+* nidio_nfo_og_2006_2023: 
 * Unique yearly OG observations with aggregated financial data between 2006 and 
-* 2022 (Unit: OG-years).
+* 2023 (Unit: OG-years).
 
 * --------------------------------------------------------------------------- */
 * 1. APPENDING NFO FINANCIAL DATA
 * ---------------------------------------------------------------------------- *
 	
-	foreach year of num 2006/2022 {
+	foreach year of num 2006/2023 {
 		
 		import spss using "${nfo`year'}", case(lower) clear
 	
@@ -48,23 +48,23 @@
 	}
 	*
 	
-	// Append files to create yearly financial data file 2006-2022
+	// Append files to create yearly financial data file 2006-2023
 	append using "${dNFO}/temp_nfo2006" "${dNFO}/temp_nfo2007" ///
 		"${dNFO}/temp_nfo2008" "${dNFO}/temp_nfo2009" "${dNFO}/temp_nfo2010" ///
 		"${dNFO}/temp_nfo2011" "${dNFO}/temp_nfo2012" "${dNFO}/temp_nfo2013" ///
 		"${dNFO}/temp_nfo2014" "${dNFO}/temp_nfo2015" "${dNFO}/temp_nfo2016" ///
 		"${dNFO}/temp_nfo2017" "${dNFO}/temp_nfo2018" "${dNFO}/temp_nfo2019" ///
-		"${dNFO}/temp_nfo2020" "${dNFO}/temp_nfo2021"
+		"${dNFO}/temp_nfo2020" "${dNFO}/temp_nfo2021" "${dNFO}/temp_nfo2022"
 	
 	// Labeling
 	labels_nidio, module(nfo)
 		
 	gsort year ogid finr
 	
-	save "${dNFO}/nidio_nfo_finances_2006_2022", replace	
+	save "${dNFO}/nidio_nfo_finances_2006_2023", replace	
 	
 	// Erase stored temp files
-	foreach year of num 2006/2022 {
+	foreach year of num 2006/2023 {
 		erase "${dNFO}/temp_nfo`year'.dta"
 	}
 	*
@@ -77,7 +77,7 @@
 * Preparing NFO with available OGID
 ********************************************************************************	
 	
-	use "${dNFO}/nidio_nfo_finances_2006_2022", replace
+	use "${dNFO}/nidio_nfo_finances_2006_2023", replace
 	
 	// Data with available OGID
 	keep if ogid!=.
@@ -95,13 +95,13 @@
 	
 	gsort year ogid
 	
-	save "${dNFO}/og_finances_2006_2022", replace
+	save "${dNFO}/og_finances_2006_2023", replace
 	
 ********************************************************************************
 * Preparing NFO with missing OGID
 ********************************************************************************
 
-	use "${dNFO}/nidio_nfo_finances_2006_2022", replace
+	use "${dNFO}/nidio_nfo_finances_2006_2023", replace
 	
 	// Data with missing OGID
 	keep if ogid==.
@@ -118,7 +118,7 @@
 	drop ogid
 	gsort year finr
 	
-	save "${dNFO}/finr_finances_2006_2022", replace
+	save "${dNFO}/finr_finances_2006_2023", replace
 	
 	// Link to OGID
 	use "${dABR}/nidio_abr_ogkvk_register_2006_2023", replace
@@ -126,10 +126,10 @@
 	
 	gsort year finr
 	
-	merge m:1 year finr using "${dNFO}/finr_finances_2006_2022", keep(match) ///
+	merge m:1 year finr using "${dNFO}/finr_finances_2006_2023", keep(match) ///
 		keepusing(source oph revenue assets ccost lcost cdeprec profit result) ///
 		nogen
-	// --> 13.25% of all FINR are matched
+	// --> XXXX of all FINR are matched
 		
 	// --> In several cases, FINR is associated with multiple OG IDs
 	//	   In most cases, these OGs are restructuring during the same calendar year.
@@ -149,14 +149,14 @@
 	
 	gsort year ogid
 	
-	save "${dNFO}/finr_finances_2006_2022", replace
+	save "${dNFO}/finr_finances_2006_2023", replace
 
 	
 ********************************************************************************
 * Append both datasets
 ********************************************************************************
 
-	append using "${dNFO}/og_finances_2006_2022"
+	append using "${dNFO}/og_finances_2006_2023"
 	
 	gsort year ogid
 	
@@ -178,9 +178,9 @@
 	
 	gsort year ogid
 	
-	save "${dNFO}/nidio_nfo_og_2006_2022", replace
+	save "${dNFO}/nidio_nfo_og_2006_2023", replace
 	
-	erase "${dNFO}/og_finances_2006_2022.dta"
-	erase "${dNFO}/finr_finances_2006_2022.dta"
+	erase "${dNFO}/og_finances_2006_2023.dta"
+	erase "${dNFO}/finr_finances_2006_2023.dta"
 	
 	clear
