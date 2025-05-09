@@ -3,7 +3,7 @@
 *==============================================================================*
  	Project: NIDIO
 	Author: Christoph Janietz (c.janietz@rug.nl)
-	Last update: 09-04-2025
+	Last update: 10-04-2025
 * ---------------------------------------------------------------------------- *
 
 	INDEX:  
@@ -15,7 +15,7 @@
 *
 * Options:
 * - module: Specify name of module (required).
-*   AVAILABLE = ABR; EBB; GBA; KIND; NEA; NFO; OPL; PARTNER; SPOLIS
+*   AVAILABLE = ABR; BDK; EBB; GBA; KIND; NEA; NFO; OPL; PARTNER; SPOLIS
 *
 * --------------------------------------------------------------------------- */
 * 1. PROGRAM DEFINTION
@@ -38,7 +38,7 @@ program define labels_nidio
 			capture lab var ogid "OG ID"
 			capture lab var og_sectorcode "Coordinated sector code of OG"
 			capture lab var og_sector "Harmonized and simplified sector code"
-			capture lab var og_sector_alt "Longitudinally consistent sector code (2017-)"
+			capture lab var og_sector_alt "Harmonized and simplified sector code (Consistent after 2016)"
 			capture lab var og_ownership "OG ownership (non-financial firms & financial institutions)"
 			capture lab var og_nrofvep "Number of CBS persoonen attached to OG"
 			capture lab var og_employees "Number of employees in calendar year (aggregated from BE level)"
@@ -76,6 +76,11 @@ program define labels_nidio
 			capture lab var finr "Encrypted fiscal ID"
 			capture lab var vepkvk_start "Start of VEP-KVK link (since 01-07-2005)"
 			capture lab var vepkvk_end "End of VEP-KVK link in calendar year (if applicable)"
+			
+			capture lab var be_nrofvep "Number of CBS persoonen attached to BE"
+			capture lab var bevep_start "Start of BE-VEP link (since 01-07-2005)"
+			capture lab var bevep_end "End of BE-VEP link in calendar year (if applicable)"
+			capture lab var bevep_interruption "Within-year break of BE-VEP link"
 	
 			// Value labels
 			capture lab def og_sector_lbl 11 "Non-financial company" 12 "Financial organization" ///
@@ -129,6 +134,51 @@ program define labels_nidio
 				15 "OG - Death" 16 "OG - Merger" 17 "OG - Takeover" 18 "OG - Restructuring" ///
 				19 "OG - Demerger" 20 "OG - Breakup" 21 "OG - Combi Birth/Death", replace
 			capture lab val ogbe_start_event-ogbe_end_event event_lbl
+		}
+		else if `"`module'"'=="bdk" {
+			capture lab var year "Calendar year"
+			capture lab var beid "BE ID"
+			
+			capture lab var be_start_bdk "Start of BE observation (BDK)"
+			capture lab var be_end_bdk "End of BE observation (BDK)"
+			capture lab var be_start_abr "Start of BE observation (ABR)"
+			capture lab var be_end_abr "End of BE observation (ABR)"
+			
+			capture lab var be_founding "Founding date of organization"
+			capture lab var be_rechtvormcode_bdk "Legal type of the organization (BDK)"
+			capture lab var be_gksbs_bdk "Organization size of BE (BDK)"
+			capture lab var be_SBI08_bdk "Industry classification (SBI08) of BE (BDK)"
+			capture lab var be_mkb "Middle-sized or small-sized company"
+			capture lab var be_foreign "Foreign ownership"
+			capture lab var be_uci "Countrycode of Ultimate Controlling Institutional Unit"
+			capture lab var be_birth "Birth of organization during reference year"
+			capture lab var be_death "Death of organization during reference year"
+			capture lab var be_fastgrowth_bdk "Fast-growing company (BDK)"
+			
+			capture lab def vep_rechtvormcode_bdk_lbl 1 "Eenmanszaak" ///
+				2 "Maatschap, samenwerking" 10 "Vennootschap onder firma (VOF)" ///
+				20 "Commanditaire vennootschap (CV)" ///
+				40 "Besloten vennootschap (BV)" ///
+				50 "Naamloze vennootschap (NV)" ///
+				60 "Cooperative vereniging" ///
+				70 "Vereniging of stichting" ///
+				900 "Overheid" ///
+				999 "Overig of onbekend", replace
+			capture lab val vep_rechtvormcode_bdk vep_rechtvormcode_bdk_lbl
+			
+			capture lab def be_gksbs_bdk_lbl 0 "0 employees" 10 "1 employee" 21 "2 employees" ///
+				22 "3-4 employees" 30 "5-9 employees" 40 "10-19 employees" 50 "20-49 employees" ///
+				60 "50-99 employees" 71 "100-149 employees" 72 "150-199 employees" ///
+				81 "200-249 employees" 82 "250-499 employees" 91 "500-999 employees" ///
+				92 "1000-1999 employees" 93 "2000+ employees", replace
+			capture lab val be_gksbs_bdk be_gksbs_bdk_lbl
+			
+			capture lab def dummy_lbl 0 "No" 1 "Yes", replace
+			capture lab val be_mkb dummy_lbl
+			capture lab val be_foreign dummy_lbl
+			capture lab val be_birth dummy_lbl
+			capture lab val be_death dummy_lbl
+			capture lab val be_fastgrowth_bdk dummy_lbl
 		}
 		else if `"`module'"'=="ebb" {
 			capture lab var year "Calendar year"

@@ -3,7 +3,7 @@
 *==============================================================================*
  	Project: Beyond Boardroom / NIDIO
 	Author: Christoph Janietz (c.janietz@rug.nl)
-	Last update: 30-09-2024
+	Last update: 09-04-2025
 * ---------------------------------------------------------------------------- *
 
 	INDEX:  
@@ -82,10 +82,18 @@ program define source_nidio
 				display as txt "---"
 			}
 		display as txt "--------------------------------------------------------------"
+	* BDK
+		display as result "BDK:"
+		display as txt "--------------------------------------------------------------"
+			foreach year of num 2007/2023 {
+				display as txt "`year': ${bdk`year'}"
+				display as txt "---"
+			}
+		display as txt "--------------------------------------------------------------"
 	* NFO
 		display as result "NFO:"
 		display as txt "--------------------------------------------------------------"
-			foreach year of num 2006/2022 {
+			foreach year of num 2006/2023 {
 				display as txt "`year': ${nfo`year'}"
 				display as txt "---"
 			}
@@ -120,7 +128,7 @@ program define source_nidio
 		display as result "NEA:"
 		display as txt "--------------------------------------------------------------"
 		display as txt "2005-2013: ${nea0513}"
-		display as txt "2014-2022: ${nea1422}"
+		display as txt "2014-2023: ${nea1423}"
 		display as txt "--------------------------------------------------------------"
 	* PARTNER
 		display as result "PARTNERBUS:"

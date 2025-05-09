@@ -3,7 +3,7 @@
 *==============================================================================*
  	Project: Beyond Boardroom / NIDIO
 	Author: Christoph Janietz (c.janietz@rug.nl)
-	Last update: 29-09-2024
+	Last update: 09-04-2025
 * ---------------------------------------------------------------------------- *
 
 	INDEX:  
@@ -32,6 +32,11 @@ program define install_nidio
 			display as txt "Module '`namelist'' requested for installation."
 			quietly do "${sSPOLIS}/dataprep_spolis_beid"
 			quietly do "${sABR}/dataprep_ABR"
+			display as txt "Installation of module '`namelist'' completed."
+		}
+		else if "`namelist'"=="BDK" {
+			display as txt "Module '`namelist'' requested for installation."
+			quietly do "${sBDK}/dataprep_BDK"
 			display as txt "Installation of module '`namelist'' completed."
 		}
 		else if "`namelist'"=="NFO" {
