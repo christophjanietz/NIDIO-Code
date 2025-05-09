@@ -3,7 +3,7 @@
 *==============================================================================*
  	Project: NIDIO
 	Author: Christoph Janietz (c.janietz@rug.nl)
-	Last update: 17-02-2025
+	Last update: 09-04-2025
 * ---------------------------------------------------------------------------- *
 
 	INDEX: 
@@ -11,6 +11,7 @@
 		2.  OG-BE LONGITUDINAL FILE
 		3.  OG-KVK LONGITUDINAL FILE
 		4.  OG SIZE FILE
+		5.  BE-KVK LONGITUDINAL FILE
 		
 * Short description of output:
 *
@@ -30,6 +31,8 @@
 *
 * nidio_abr_og_size_2006_2023: 
 * Number of employees per OG-year between 2006 and 2023.
+*
+* nidio_abr_bekvk_register_2006_2023: 
 
 * --------------------------------------------------------------------------- */
 * 1. OG LONGITUDINAL FILE
@@ -111,8 +114,8 @@
 		year[_n+1]==2018 & (og_ownership!=og_ownership[_n+1])
 	bys ogid: replace og_sectorcode = og_sectorcode[_n+1] if year==2017 & ///
 		year[_n+1]==2018 & (og_sectorcode!=og_sectorcode[_n+1])
-
-	// Coding break in sector code after 2016
+		
+	// Dramatic drop in og_sector=='15' after 2016 because of coding break
 	// Solution: Alternative variable that holds consistent codes within OG unit
 	gsort ogid year
 	gen og_sector_alt = og_sector
@@ -706,4 +709,200 @@
 	* Save file
 	save "${dABR}/nidio_abr_og_size_2006_2023", replace
 
-	clear
+* --------------------------------------------------------------------------- */
+* 5. BE-KVK LONGITUDINAL FILE
+* ---------------------------------------------------------------------------- *
+
+	foreach year of num 2006/2023 {
+		
+		import spss using "${abr_BE_pers`year'}", case(lower) clear
+		
+		// Rename ID variables according to convention
+		capture rename rbe_identificatie beid
+		capture rename be_id beid
+		capture rename beidentificatie beid
+		
+		capture rename persoon_identificatie vepid
+		capture rename cbspersoonidentificatie vepid
+		
+		capture rename (cpogmaandbegin cpogmaandeinde) (rop_datumontstaantoepassing ///
+			rop_datumopheffingtoepassing)
+		capture rename (maandbegin maandeinde) (rop_datumontstaantoepassing ///
+			rop_datumopheffingtoepassing)
+		
+		// Add calendar year
+		gen year = `year'
+		order year, before(beid)
+	
+		// Start / end OG-VEP link
+		tostring rop_datumontstaantoepassing rop_datumopheffingtoepassing, replace
+	
+		gen bevep_start = date(rop_datumontstaantoepassing, "YMD") 
+		gen bevep_end = date(rop_datumopheffingtoepassing, "YMD") 
+	
+		drop rop_datumontstaantoepassing rop_datumopheffingtoepassing
+		
+		// Interruptions within calendar year of OG-VEP link (ignore, but tag)
+		gduplicates tag year beid vepid, gen(bevep_interruption)
+		
+		gegen bevep_s=min(bevep_start), by(year beid vepid)
+		gegen bevep_e=max(bevep_end), missing by(year beid vepid)
+		
+		drop bevep_start bevep_end
+		rename (bevep_s bevep_e) (bevep_start bevep_end)
+		order bevep_interruption, after(bevep_end)
+		
+		format bevep_start %d
+		format bevep_end %d
+		
+		gduplicates drop year beid vepid, force
+		
+		// Save temporary file
+		save "${dABR}/temp_bevep`year'", replace	
+	}
+	*
+	
+	// Append files to create yearly OG-VEP link file 2006-2023
+	append using "${dABR}/temp_bevep2006" "${dABR}/temp_bevep2007" "${dABR}/temp_bevep2008" ///
+		"${dABR}/temp_bevep2009" "${dABR}/temp_bevep2010" "${dABR}/temp_bevep2011" ///
+		"${dABR}/temp_bevep2012" "${dABR}/temp_bevep2013" "${dABR}/temp_bevep2014" ///
+		"${dABR}/temp_bevep2015" "${dABR}/temp_bevep2016" "${dABR}/temp_bevep2017" ///
+		"${dABR}/temp_bevep2018" "${dABR}/temp_bevep2019" "${dABR}/temp_bevep2020" ///
+		"${dABR}/temp_bevep2021" "${dABR}/temp_bevep2022"
+		
+	gsort year beid vepid
+	
+	save "${dABR}/bevep_link_2006_2023", replace	
+	
+	*Delete temporary files
+	foreach year of num 2006/2023 {
+		erase "${dABR}/temp_bevep`year'.dta"
+	}
+	*
+	
+********************************************************************************
+* Preparing ABR_CBS_KVK
+********************************************************************************
+	
+	foreach year of num 2006/2023 {
+		
+		import spss using "${abr_CBS_KVK`year'}", case(lower) clear
+		
+		// Rename ID variables according to convention
+		capture rename vep_identificatie vepid
+		capture rename vep vepid
+		capture rename cbspersoonidentificatie vepid
+		
+		capture rename vep_kvkdossiernummer_crypt kvkid
+		capture rename vep_kvknummer_crypt kvkid
+		capture rename vep_kvknummer kvkid
+		capture rename kvknr kvkid
+		capture rename kvknummer kvkid
+		
+		capture rename vep_finr_crypt finr
+		capture rename vep_finr finr
+		
+		capture rename (cpogmaandbegin cpogmaandeinde) (vep_datumontstaantoepassing ///
+			vep_datumopheffingtoepassing)
+		capture rename (cpmaandbegin cpmaandeinde) (vep_datumontstaantoepassing ///
+			vep_datumopheffingtoepassing)
+		
+		// Add calendar year
+		gen year = `year'
+		order year, before(vepid)
+	
+		// Start / end VEP-KVK link
+		if `year'!=2019 & `year'!=2020 {
+			tostring vep_datumontstaantoepassing vep_datumopheffingtoepassing, replace
+	
+			gen vepkvk_start = date(vep_datumontstaantoepassing, "YMD")
+			format vepkvk_start %d
+			gen vepkvk_end = date(vep_datumopheffingtoepassing, "YMD") 
+			format vepkvk_end %d
+	
+			drop vep_datumontstaantoepassing vep_datumopheffingtoepassing
+		}
+		else {
+			rename vep_datumontstaantoepassing vepkvk_start
+			replace vepkvk_start = .
+			rename vep_datumopheffingtoepassing vepkvk_end 
+			replace vepkvk_end = .
+		}
+		
+		// Data issue: 2022 & 2023 with many duplicates despite consistent KvK / Finr
+		// Solution: Take min max dates within calendar year & drop duplicates
+		if `year'==2022 | `year'==2023 {
+			gegen vep_s=min(vepkvk_start), by(vepid)
+			gegen vep_e=max(vepkvk_end), missing by(vepid)
+		
+			drop vepkvk_start vepkvk_end
+			rename (vep_s vep_e) (vepkvk_start vepkvk_end)
+		
+			format vepkvk_start %d
+			format vepkvk_end %d
+		
+			gduplicates drop vepid, force
+		}
+		
+		// Keep specific set of variables
+		keep year vepid kvkid finr vepkvk_start vepkvk_end
+		
+		// Save temporary file
+		save "${dABR}/temp_vepkvk`year'", replace	
+	}
+	*
+	
+	// Append files to create yearly VEP-KVK link file 2006-2023
+	append using "${dABR}/temp_vepkvk2006" "${dABR}/temp_vepkvk2007" ///
+		"${dABR}/temp_vepkvk2008" "${dABR}/temp_vepkvk2009" "${dABR}/temp_vepkvk2010" ///
+		"${dABR}/temp_vepkvk2011" "${dABR}/temp_vepkvk2012" "${dABR}/temp_vepkvk2013" /// 
+		"${dABR}/temp_vepkvk2014" "${dABR}/temp_vepkvk2015" "${dABR}/temp_vepkvk2016" /// 
+		"${dABR}/temp_vepkvk2017" "${dABR}/temp_vepkvk2018" "${dABR}/temp_vepkvk2019" ///
+		"${dABR}/temp_vepkvk2020" "${dABR}/temp_vepkvk2021" "${dABR}/temp_vepkvk2022"
+		
+	gsort year vepid
+	
+	save "${dABR}/vepkvk_link_2006_2023", replace	
+	
+	*Delete temporary files
+	foreach year of num 2006/2023 {
+		erase "${dABR}/temp_vepkvk`year'.dta"
+	}
+	*
+	
+********************************************************************************
+* Merge
+********************************************************************************
+
+	use "${dABR}/nidio_abr_ogbe_register_2006_2023", replace
+	
+	// Reduce variable set
+	keep year beid be_start be_end
+	
+	
+	// First merge: ABR_BE & ABR_BE_VEP
+	merge 1:m year beid using "${dABR}/bevep_link_2006_2023", keep(master match) ///
+		nogen
+	
+	// Second merge: ABR_BEVEP & ABR_VEP_KVK
+	gsort year vepid
+	merge m:1 year vepid using "${dABR}/vepkvk_link_2006_2023", keep(master match) ///
+		nogen
+	
+	// Create variable containing number of VEP per year-BE
+	bys year beid: gen be_nrofvep = _N
+	order be_nrofvep, after(beid)
+	
+	// Recast kvkid and finr as str32 to enable merging
+	capture recast str kvkid
+	capture recast str finr
+	
+	// Labeling
+	labels_nidio, module(abr)
+	
+	gsort year beid vepid
+		
+	save "${dABR}/nidio_abr_bekvk_register_2006_2023", replace
+	
+	erase "${dABR}/bevep_link_2006_2023.dta"
+	erase "${dABR}/vepkvk_link_2006_2023.dta"
