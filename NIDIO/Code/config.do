@@ -24,7 +24,7 @@
 *** Create and set paths to data folders
 	// create folders
 	capture mkdir "${wd}/Data"
-	foreach module in ABR NFO EBB NEA GBAPERSOONTAB HOOGSTEOPLTAB ///
+	foreach module in ABR BDK NFO EBB NEA GBAPERSOONTAB HOOGSTEOPLTAB ///
 	KINDOUDERTAB PARTNERBUS SPOLISBUS {
 		capture mkdir "${wd}/Data/`module'"
 	}
@@ -33,6 +33,7 @@
 	// path to folders 
 	global ddir 		"${wd}/Data"				// Data Working Directory
 	global dABR			"${ddir}/ABR" 				// Company register (company)
+	global dBDK			"${ddir}/BDK" 				// Company demography (company)
 	global dNFO			"${ddir}/NFO"	  			// Financial data (company)
 	global dEBB 		"${ddir}/EBB"				// Labor force survey (individual)
 	global dNEA			"${ddir}/NEA"				// Employment conditions survey (indivdiual)
@@ -46,6 +47,7 @@
 	// path to folders 	
 	global sdir 		"${wd}/Code"				// Code Working Directory
 	global sABR			"${sdir}/ABR" 				// Company register (company)
+	global sBDK			"${sdir}/BDK" 				// Company demography (company)
 	global sNFO			"${sdir}/NFO"	  			// Financial data (company)
 	global sEBB 		"${sdir}/EBB"				// Labor force survey (individual)
 	global sNEA			"${sdir}/NEA"				// Employment conditions survey (indivdiual)
@@ -231,8 +233,15 @@
 	}
 	*
 	
+	*BDK
+	foreach year of num 2007/2023 {
+	   local bdk`year': dir "G:/Bedrijven/BDK/" files "BDK`year'V*.sav"
+	   global bdk`year' = "G:/Bedrijven/BDK/" + `bdk`year''
+	}
+	*
+	
 	*NFO
-	foreach year of num 2006/2022 {
+	foreach year of num 2006/2023 {
 	   local nfo`year': dir "G:/Bedrijven/NFO/" files "NFO`year'V*.sav"
 	   global nfo`year' = "G:/Bedrijven/NFO/" + `nfo`year''
 	}
@@ -248,8 +257,8 @@
 	*NEA
 	local nea0513: dir "G:/Arbeid/NEA/" files "NEA2005_2013V*.sav"
 	global nea0513 = "G:/Arbeid/NEA/" + `nea0513'
-	local nea1422: dir "G:/Arbeid/NEA/" files "NEA2014-2022V*.sav"
-	global nea1422 = "G:/Arbeid/NEA/" + `nea1422'
+	local nea1423: dir "G:/Arbeid/NEA/" files "NEA2014-2023V*.sav"
+	global nea1423 = "G:/Arbeid/NEA/" + `nea1423'
 	
 	*GBAPERSOONTAB
 	local GBAPERSOON2009: dir "G:/Bevolking/GBAPERSOONTAB/2009/" files "GBAPERSOON2009TABV*.sav"
