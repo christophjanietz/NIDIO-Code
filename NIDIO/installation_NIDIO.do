@@ -3,7 +3,7 @@
 *==============================================================================*
  	Project: NIDIO
 	Author: Christoph Janietz (c.janietz@rug.nl)
-	Last update: 02-12-2024
+	Last update: 09-04-2025
 * ---------------------------------------------------------------------------- */
 
 *** Run configuration file (from current file path)
@@ -15,6 +15,7 @@
 	
 *** Customizable Installation
 	install_nidio ABR 				// Installs module ABR
+	install_nidio BDK 				// Installs module BDK
 	install_nidio NFO				// Installs module NFO
 	
 	install_nidio EBB 				// Installs module EBB
@@ -39,8 +40,9 @@
 	* The following modules are currently included in NIDIO:
 	
 	* ORGANIZATION LEVEL:
-	* - ABR: Company register (4 datasets; 2.12 GB (total))
-	* - NFO: Financial data (2 datasets; 668 MB (total))
+	* - ABR: Company register (5 datasets; 3.36 GB (total))
+	* - BDK: Company demography (1 dataset; 1.69 GB)
+	* - NFO: Financial data (2 datasets; 728 MB (total))
 	
 	* PERSON LEVEL:
 	* - EBB: Occupational codes via Dutch labor force survey (1 dataset; 144 MB)
