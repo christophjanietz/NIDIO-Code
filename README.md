@@ -36,7 +36,7 @@ NIDIO is installed by performing the following steps:
 ## Importing NIDIO into the CBS RA Environment
 There are two ways to install NIDIO within the CBS RA Environment:
 
-1. **Download NIDIO as a zip folder from the OSF repository.** The NIDIO code can be retrieved at [https://osf.io/9b2xh/](https://osf.io/9b2xh/). This OSF repository is intended as the main gateway for the distribution of NIDIO. The OSF repository is synchronized with a [GitHub repository](https://github.com/christophjanietz/NIDIO-Code) in which the code is hosted and maintained. It is recommended to download the whole NIDIO folder as a zip via the OSF repository (see Figure \ref{fig:download}).
+1. **Download NIDIO as a zip folder from the OSF repository.** The NIDIO code can be retrieved at [https://osf.io/9b2xh/](https://osf.io/9b2xh/). This OSF repository is intended as the main gateway for the distribution of NIDIO. The OSF repository is synchronized with a [GitHub repository](https://github.com/christophjanietz/NIDIO-Code) in which the code is hosted and maintained. It is recommended to download the whole NIDIO folder as a zip file via the OSF repository.
 
 Users may then contact CBS [microdata@cbs.nl](mailto:microdata@cbs.nl) to request an import of the NIDIO zip folder into their RA project environment.
     
