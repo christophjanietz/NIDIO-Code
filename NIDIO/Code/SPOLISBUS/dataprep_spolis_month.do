@@ -3,11 +3,11 @@
 *==============================================================================*
  	Project: NIDIO
 	Author: Christoph Janietz (c.janietz@rug.nl)
-	Last update: 11-04-2025
+	Last update: 09-04-2025
 * ---------------------------------------------------------------------------- *
 
 	INDEX: 
-		1.  POLIS (2006-2009)
+		1. 	POLIS (2006-2009)
 		2.  SPOLIS (2010-2023) 
 		3.  APPEND YEARLY FILES
 		
@@ -123,7 +123,7 @@
 		merge m:1 scao_crypt using "${BedrijfstakCAO}", keep(master match) ///
 			nogen keepusing(caosoortgrp1)
 		rename caosoortgrp1 cao
-		destring cao, replace
+		destring cao, replace 
 		recode cao (0=0) (1=1) (2=2) (9=.)
 		order scao_crypt cao, after(scaosector)
 		
@@ -323,7 +323,7 @@
 		merge m:1 scao_crypt using "${BedrijfstakCAO}", keep(master match) ///
 			nogen keepusing(caosoortgrp1)
 		rename caosoortgrp1 cao
-		destring cao, replace
+		destring cao, replace 
 		recode cao (0=0) (1=1) (2=2) (9=.)
 		order scao_crypt cao, after(scaosector)
 		
