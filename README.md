@@ -2,7 +2,7 @@
 
 Stata code to prepare and analyze Dutch administrative register data in the CBS Microdata RA environment.
 
-Version: V1.1
+Version: V1.2
 
 GitHub: [github.com/christophjanietz/NIDIO-Code](https://www.github.com/christophjanietz/NIDIO-Code)
 
