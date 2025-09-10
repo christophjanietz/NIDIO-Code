@@ -3,7 +3,7 @@
 *==============================================================================*
  	Project: NIDIO
 	Author: Christoph Janietz (c.janietz@rug.nl)
-	Last update: 09-04-2025
+	Last update: 08-08-2025
 * ---------------------------------------------------------------------------- */
 
 * This do-file has the following purpose:
@@ -240,6 +240,21 @@
 	}
 	*
 	
+	*BDK - Within-Year Koppeltabel
+	foreach year of num 2007/2023 {
+	   local bdk_kopp_`year': dir "G:/Bedrijven/BDK/" files "BDKKoppeltabelBE`year'V*.sav"
+	   global bdk_kopp_`year' = "G:/Bedrijven/BDK/" + `bdk_kopp_`year''
+	}
+	*
+	
+	*BDK - Year-Switch Koppeltabel
+	foreach year of num 2007/2023 {
+	   local t2 = `year'+1
+	   local bdk_kopp_switch_`year': dir "G:/Bedrijven/BDK/" files "BDKKoppeltabelBE`year'`t2'V*.sav"
+	   global bdk_kopp_switch_`year' = "G:/Bedrijven/BDK/" + `bdk_kopp_switch_`year''
+	}
+	*
+	
 	*NFO
 	foreach year of num 2006/2023 {
 	   local nfo`year': dir "G:/Bedrijven/NFO/" files "NFO`year'V*.sav"
@@ -285,8 +300,8 @@
 	capture global opl2022 "G:/Onderwijs/HOOGSTEOPLTAB/2022/geconverteerde data/HOOGSTEOPL2022TABV2.dta"
 	
 	*KINDOUDERTAB
-	local kindouder2023: dir "G:/Bevolking/KINDOUDERTAB/" files "KINDOUDER2023TABV*.sav"
-	global kindouder2023 = "G:/Bevolking/KINDOUDERTAB/" + `kindouder2023'
+	local kindouder2024: dir "G:/Bevolking/KINDOUDERTAB/" files "KINDOUDER2024TABV*.sav"
+	global kindouder2024 = "G:/Bevolking/KINDOUDERTAB/" + `kindouder2024'
 	
 	*PARTNERBUS
 	foreach year of num 2010/2013 {
