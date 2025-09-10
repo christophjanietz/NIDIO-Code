@@ -3,7 +3,7 @@
 *==============================================================================*
  	Project: NIDIO
 	Author: Christoph Janietz (c.janietz@rug.nl)
-	Last update: 09-04-2025
+	Last update: 28-08-2025
 * ---------------------------------------------------------------------------- */
 
 *** Run configuration file (from current file path)
@@ -41,7 +41,7 @@
 	
 	* ORGANIZATION LEVEL:
 	* - ABR: Company register (5 datasets; 3.36 GB (total))
-	* - BDK: Company demography (1 dataset; 1.69 GB)
+	* - BDK: Company demography (2 datasets; 1.75 GB (total))
 	* - NFO: Financial data (2 datasets; 728 MB (total))
 	
 	* PERSON LEVEL:
