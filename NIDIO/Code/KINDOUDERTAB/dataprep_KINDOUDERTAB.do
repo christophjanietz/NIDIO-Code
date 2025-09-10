@@ -3,7 +3,7 @@
 *==============================================================================*
  	Project: NIDIO
 	Author: Christoph Janietz (c.janietz@rug.nl)
-	Last update: 23-10-2024
+	Last update: 25-08-2025
 * ---------------------------------------------------------------------------- *
 
 	INDEX: 
@@ -20,7 +20,7 @@
 * ---------------------------------------------------------------------------- *
 	
 	foreach x in ma pa {
-		import spss using "${kindouder2023}", case(lower) clear
+		import spss using "${kindouder2024}", case(lower) clear
 		
 		// Second local holding opposite code
 		if "`x'"=="ma" {
@@ -31,7 +31,6 @@
 		}
 		
 		// Select on registration on GBR (code R)
-		*Child (Dropping non-registered children (1.82%) and stillbirths (0.15%))
 		keep if rinpersoons=="R"
 		*Mothers / Fathers (Dropping non-registered mothers and fathers)
 		keep if rinpersoons`x'=="R"
@@ -72,6 +71,9 @@
 	
 	order rinpersoon rin_nrchildren rin_mfchild rinchild child_birthy child_birthm ///
 		childparent_link rinalterp
+		
+	// Restrict to births until 2023
+	drop if child_birthy>2023
 		
 	// Labeling
 	labels_nidio, module(kind)
