@@ -3,7 +3,7 @@
 *==============================================================================*
  	Project: Beyond Boardroom / NIDIO
 	Author: Christoph Janietz (c.janietz@rug.nl)
-	Last update: 09-04-2025
+	Last update: 08-08-2025
 * ---------------------------------------------------------------------------- *
 
 	INDEX:  
@@ -37,6 +37,7 @@ program define install_nidio
 		else if "`namelist'"=="BDK" {
 			display as txt "Module '`namelist'' requested for installation."
 			quietly do "${sBDK}/dataprep_BDK"
+			quietly do "${sBDK}/dataprep_BDK_lbeid"
 			display as txt "Installation of module '`namelist'' completed."
 		}
 		else if "`namelist'"=="NFO" {
