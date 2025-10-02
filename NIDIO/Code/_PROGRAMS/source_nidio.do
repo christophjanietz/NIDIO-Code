@@ -3,7 +3,7 @@
 *==============================================================================*
  	Project: Beyond Boardroom / NIDIO
 	Author: Christoph Janietz (c.janietz@rug.nl)
-	Last update: 09-04-2025
+	Last update: 02-10-2025
 * ---------------------------------------------------------------------------- *
 
 	INDEX:  
@@ -122,7 +122,7 @@ program define source_nidio
 	*KIND
 		display as result "KINDOUDERTAB:"
 		display as txt "--------------------------------------------------------------"
-		display as txt "2023: ${kindouder2023}"
+		display as txt "202?: ${kindouder}"
 		display as txt "--------------------------------------------------------------"
 	* NEA 
 		display as result "NEA:"
@@ -161,4 +161,5 @@ program define source_nidio
 		
 	
 		
+
 end
