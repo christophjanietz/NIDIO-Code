@@ -3,7 +3,7 @@
 *==============================================================================*
  	Project: NIDIO
 	Author: Christoph Janietz (c.janietz@rug.nl)
-	Last update: 25-08-2025
+	Last update: 02-10-2025
 * ---------------------------------------------------------------------------- *
 
 	INDEX: 
@@ -20,7 +20,7 @@
 * ---------------------------------------------------------------------------- *
 	
 	foreach x in ma pa {
-		import spss using "${kindouder2024}", case(lower) clear
+		import spss using "${kindouder}", case(lower) clear
 		
 		// Second local holding opposite code
 		if "`x'"=="ma" {
@@ -86,3 +86,4 @@
 	erase "${dKIND}/kindouder_pa_2023.dta"
 	
 	clear
+
