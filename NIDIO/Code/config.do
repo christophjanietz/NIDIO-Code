@@ -3,7 +3,7 @@
 *==============================================================================*
  	Project: NIDIO
 	Author: Christoph Janietz (c.janietz@rug.nl)
-	Last update: 08-08-2025
+	Last update: 02-10-2025
 * ---------------------------------------------------------------------------- */
 
 * This do-file has the following purpose:
@@ -285,23 +285,19 @@
 	*HOOGSTEOPLTAB
 	// (Use .dta file format)
 	foreach year of num 2006/2012 {
-	   local opl`year': dir "G:/Onderwijs/HOOGSTEOPLTAB/`year'/geconverteerde data/" ///
-			files "* HOOGSTEOPLTAB `year'V*.dta"
-	   global opl`year' =  "G:/Onderwijs/HOOGSTEOPLTAB/`year'/geconverteerde data/" + `opl`year''
+	   local opl`year': dir "G:/Onderwijs/HOOGSTEOPLTAB/`year'/" files "* HOOGSTEOPLTAB `year'V*.dta"
+	   global opl`year' =  "G:/Onderwijs/HOOGSTEOPLTAB/`year'/" + `opl`year''
 	}
 	*
-	foreach year of num 2013/2019 2021 2023 {
-	   capture local opl`year': dir "G:/Onderwijs/HOOGSTEOPLTAB/`year'/geconverteerde data/" ///
-			files "HOOGSTEOPL`year'TABV*.dta"
-	   capture global opl`year' =  "G:/Onderwijs/HOOGSTEOPLTAB/`year'/geconverteerde data/" + `opl`year''
+	foreach year of num 2013/2023 {
+	   capture local opl`year': dir "G:/Onderwijs/HOOGSTEOPLTAB/`year'/" files "HOOGSTEOPL`year'TABV*.dta"
+	   capture global opl`year' =  "G:/Onderwijs/HOOGSTEOPLTAB/`year'/" + `opl`year''
 	}
 	*
-	capture global opl2020 "G:/Onderwijs/HOOGSTEOPLTAB/2020/geconverteerde data/HOOGSTEOPL2020TABV2.dta"
-	capture global opl2022 "G:/Onderwijs/HOOGSTEOPLTAB/2022/geconverteerde data/HOOGSTEOPL2022TABV2.dta"
 	
 	*KINDOUDERTAB
-	local kindouder2024: dir "G:/Bevolking/KINDOUDERTAB/" files "KINDOUDER2024TABV*.sav"
-	global kindouder2024 = "G:/Bevolking/KINDOUDERTAB/" + `kindouder2024'
+	local kindouder: dir "G:/Bevolking/KINDOUDERTAB/" files "KINDOUDER????TABV*.sav"
+	global kindouder = "G:/Bevolking/KINDOUDERTAB/" + `kindouder'
 	
 	*PARTNERBUS
 	foreach year of num 2010/2013 {
@@ -324,13 +320,13 @@
 	// (Use .dta format for (S)POLIS to be able to drop variables while loading 
 	// datasets.)
 	foreach year of num 2006/2009 {
-	   local polis`year': dir "G:/Polis/POLISBUS/Geconverteerdedata/" files "POLISBUS`year'V*.dta"
-	   global polis`year' =  "G:/Polis/POLISBUS/Geconverteerdedata/" + `polis`year''
+	   local polis`year': dir "G:/Polis/POLISBUS/" files "POLISBUS`year'V*.dta"
+	   global polis`year' =  "G:/Polis/POLISBUS/" + `polis`year''
 	}
 	*
 	foreach year of num 2010/2023 {
-	   local spolis`year': dir "G:/Spolis/SPOLISBUS/Geconverteerdedata/" files "SPOLISBUS`year'V*.dta"
-	   global spolis`year' =  "G:/Spolis/SPOLISBUS/Geconverteerdedata/" + `spolis`year''
+	   local spolis`year': dir "G:/Spolis/SPOLISBUS/" files "SPOLISBUS`year'V*.dta"
+	   global spolis`year' =  "G:/Spolis/SPOLISBUS/" + `spolis`year''
 	}
 	*
 	
@@ -382,4 +378,5 @@
 	// Bedrijfstak-CAO codes
 	do "${sdir}/_AUXILIARY/CAO/CAO"
 	
+
 	
