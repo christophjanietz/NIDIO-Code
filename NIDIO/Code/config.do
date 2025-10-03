@@ -12,12 +12,11 @@
 * - Install the user-written NIDIO Stata commands.
 
 *** General settings
-	version 16
+	version 19
 	set more off, perm 
 	cap log close
 	set seed 12345
-	set scheme plotplain, perm
-	set matsize 11000, perm 
+	set scheme plotplain, perm 
 	set maxvar 32767, perm
 	matrix drop _all
 
@@ -290,8 +289,8 @@
 	}
 	*
 	foreach year of num 2013/2023 {
-	   capture local opl`year': dir "G:/Onderwijs/HOOGSTEOPLTAB/`year'/" files "HOOGSTEOPL`year'TABV*.dta"
-	   capture global opl`year' =  "G:/Onderwijs/HOOGSTEOPLTAB/`year'/" + `opl`year''
+	   local opl`year': dir "G:/Onderwijs/HOOGSTEOPLTAB/`year'/" files "HOOGSTEOPL`year'TABV*.dta"
+	   global opl`year' =  "G:/Onderwijs/HOOGSTEOPLTAB/`year'/" + `opl`year''
 	}
 	*
 	
@@ -373,10 +372,8 @@
 *** Auxiliary
 	
 	// CPI data
-	do "${sdir}/_AUXILIARY/CPI/CPI"
+	quietly do "${sdir}/_AUXILIARY/CPI/CPI"
 	
 	// Bedrijfstak-CAO codes
-	do "${sdir}/_AUXILIARY/CAO/CAO"
-	
-
+	quietly do "${sdir}/_AUXILIARY/CAO/CAO"
 	
