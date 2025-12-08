@@ -3,7 +3,7 @@
 *==============================================================================*
  	Project: NIDIO
 	Author: Christoph Janietz (c.janietz@rug.nl)
-	Last update: 30-10-2024
+	Last update: 08-12-2025
 * ---------------------------------------------------------------------------- *
 
 	INDEX: 
@@ -11,7 +11,7 @@
 		
 * Short description of output:
 *
-* nidio_gba_rin_2023:
+* nidio_gba_rin_2024:
 * - Demographic characteristics of individuals who are registered in the GBR.
 *	(Unit: RIN).
 *
@@ -20,7 +20,7 @@
 * 1. GBA DEMOGRAPHIC FILE
 * ---------------------------------------------------------------------------- *
 
-	import spss using "${GBAPERSOON2023}", case(lower) clear
+	import spss using "${GBAPERSOON2024}", case(lower) clear
 	
 	//Select only persoons registered in GBA
 	keep if rinpersoons=="R"
@@ -96,7 +96,6 @@
 	gsort rinpersoon
 	
 	// Save
-	save "${dGBA}/nidio_gba_rin_2023", replace
+	save "${dGBA}/nidio_gba_rin_2024", replace
 	
 	clear
-	
