@@ -3,7 +3,7 @@
 *==============================================================================*
  	Project: NIDIO
 	Author: Christoph Janietz (c.janietz@rug.nl) / Zoltán Lippényi
-	Last update: 23-10-2024
+	Last update: 08-12-2025
 * ---------------------------------------------------------------------------- *
 
 	INDEX:  
@@ -19,7 +19,7 @@
 *
 * - start (default: 2006): specify starting year.
 *
-* - end (default: 2023): specify ending year. 
+* - end (default: 2024): specify ending year. 
 *
 * - jobtype (default: 1): select specific types of jobs.
 *	1={all jobs}; 2={temp, oncall, standard jobs}; 3={only standard jobs}
@@ -37,7 +37,7 @@
 * ---------------------------------------------------------------------------- *
 capture program drop spolisselect
 program define spolisselect
-	syntax [namelist], DATAformat(string) [start(integer 2006) end(integer 2023) ///
+	syntax [namelist], DATAformat(string) [start(integer 2006) end(integer 2024) ///
 		jobtype(integer 1) mainjob(integer 0)]
 	
 	* Loading time warning
@@ -51,7 +51,7 @@ program define spolisselect
 	* (options: DATAformat (required); start; end)
 		if `"`dataformat'"'=="month" {
 			quietly use `namelist' if year>=`start' & year<=`end' using ///
-				"${dSPOLIS}/nidio_spolis_month_2006_2023", replace
+				"${dSPOLIS}/nidio_spolis_month_2006_2024", replace
 			quietly count
 			local n_tot = r(N)
 			display as txt "Month data format (jobs in September) selected."
@@ -61,7 +61,7 @@ program define spolisselect
 		}
 		else if `"`dataformat'"'=="year" {
 			quietly use `namelist' if year>=`start' & year<=`end' using ///
-				"${dSPOLIS}/nidio_spolis_year_2006_2023", replace
+				"${dSPOLIS}/nidio_spolis_year_2006_2024", replace
 			quietly count
 			local n_tot = r(N)
 			display as txt "Year data format selected."
@@ -123,3 +123,4 @@ program define spolisselect
 	* End notification
 		display as txt "SPOLIS data successfully loaded!"
 end
+
