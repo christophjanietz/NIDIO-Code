@@ -3,7 +3,7 @@
 *==============================================================================*
  	Project: NIDIO
 	Author: Christoph Janietz (c.janietz@rug.nl)
-	Last update: 09-04-2025
+	Last update: 08-12-2025
 * ---------------------------------------------------------------------------- *
 
 	INDEX: 
@@ -17,28 +17,30 @@
 *
 * - Longitudinal organization files (Unit: OG-years)
 *
-* nidio_abr_og_register_2006_2023: 
-* Unique yearly OG observations (OG-years) between 2006 and 2023.
+* nidio_abr_og_register_2006_2024: 
+* Unique yearly OG observations (OG-years) between 2006 and 2024.
 *
-* nidio_abr_ogbe_register_2006_2023:  
-* BE units attached to OG-years between between 2006 and 2023.
+* nidio_abr_ogbe_register_2006_2024:  
+* BE units attached to OG-years between between 2006 and 2024.
 * Includes additional variables such as size, industry, and municipality measured
 * at the BE level.
 *
-* nidio_abr_ogkvk_register_2006_2023: 
+* nidio_abr_ogkvk_register_2006_2024: 
 * KVK IDs & FINRs attached to OG-years (with at least one SPOLIS observations) 
-* between between 2006 and 2023.
+* between between 2006 and 2024.
 *
-* nidio_abr_og_size_2006_2023: 
-* Number of employees per OG-year between 2006 and 2023.
+* nidio_abr_og_size_2006_2024: 
+* Number of employees per OG-year between 2006 and 2024.
 *
-* nidio_abr_bekvk_register_2006_2023: 
+* nidio_abr_bekvk_register_2006_2024: 
+* KVK IDs & FINRs attached to BE-years (with at least one SPOLIS observations) 
+* between between 2006 and 2024.
 
 * --------------------------------------------------------------------------- */
 * 1. OG LONGITUDINAL FILE
 * ---------------------------------------------------------------------------- *
 
-	foreach year of num 2006/2023 {
+	foreach year of num 2006/2024 {
 		
 		import spss using "${abr_OG`year'}", case(lower) clear
 			
@@ -97,13 +99,13 @@
 	}
 	*
 	
-	// Append files to create yearly OG register 2006-2023
+	// Append files to create yearly OG register 2006-2024
 	append using "${dABR}/temp_og2006" "${dABR}/temp_og2007" "${dABR}/temp_og2008" ///
 		"${dABR}/temp_og2009" "${dABR}/temp_og2010" "${dABR}/temp_og2011" ///
 		"${dABR}/temp_og2012" "${dABR}/temp_og2013" "${dABR}/temp_og2014" ///
 		"${dABR}/temp_og2015" "${dABR}/temp_og2016" "${dABR}/temp_og2017" ///
 		"${dABR}/temp_og2018" "${dABR}/temp_og2019" "${dABR}/temp_og2020" ///
-		"${dABR}/temp_og2021" "${dABR}/temp_og2022"
+		"${dABR}/temp_og2021" "${dABR}/temp_og2022" "${dABR}/temp_og2023"
 		
 	// Coding error by CBS in 2017: multiple sector codes are incorrectly assigned
 	// Solution: Recode 2017 sectorcode to 2018 sectorcode if inconsistent
@@ -134,10 +136,10 @@
 	* Remove households & foreign entities from OG register
 	keep if og_sector == 11 | og_sector == 12 | og_sector == 13 | og_sector == 15
 		
-	save "${dABR}/nidio_abr_og_register_2006_2023", replace	
+	save "${dABR}/nidio_abr_og_register_2006_2024", replace	
 	
 	*Delete temporary files
-	foreach year of num 2006/2023 {
+	foreach year of num 2006/2024 {
 		erase "${dABR}/temp_og`year'.dta"
 	}
 	*
@@ -150,7 +152,7 @@
 * Preparing ABR_BE
 ********************************************************************************
 	
-	foreach year of num 2006/2023 {
+	foreach year of num 2006/2024 {
 		import spss using "${abr_BE`year'}", case(lower) clear
 		
 		* Starting in 2021: differing variable names
@@ -245,20 +247,20 @@
 	}
 	*
 	
-	// Append files to create yearly BE register 2006-2023
+	// Append files to create yearly BE register 2006-2024
 	append using "${dABR}/temp_be2006" "${dABR}/temp_be2007" "${dABR}/temp_be2008" ///
 		"${dABR}/temp_be2009" "${dABR}/temp_be2010" "${dABR}/temp_be2011" ///
 		"${dABR}/temp_be2012" "${dABR}/temp_be2013" "${dABR}/temp_be2014" ///
 		"${dABR}/temp_be2015" "${dABR}/temp_be2016" "${dABR}/temp_be2017" ///
 		"${dABR}/temp_be2018" "${dABR}/temp_be2019" "${dABR}/temp_be2020" ///
-		"${dABR}/temp_be2021" "${dABR}/temp_be2022"
+		"${dABR}/temp_be2021" "${dABR}/temp_be2022" "${dABR}/temp_be2023"
 		
 	gsort year ogid
 	
-	save "${dABR}/be_register_2006_2023", replace	
+	save "${dABR}/be_register_2006_2024", replace	
 	
 	*Delete temporary files
-	foreach year of num 2006/2023 {
+	foreach year of num 2006/2024 {
 		erase "${dABR}/temp_be`year'.dta"
 	}
 	*
@@ -267,7 +269,7 @@
 * Preparing ABR_OG_BE
 ********************************************************************************
 
-	foreach year of num 2006/2023 {
+	foreach year of num 2006/2024 {
 		
 		import spss using "${abr_OG_BE`year'}", case(lower) clear
 		
@@ -313,20 +315,20 @@
 	}
 	*
 	
-	// Append files to create yearly OG-BE link file 2006-2023
+	// Append files to create yearly OG-BE link file 2006-2024
 	append using "${dABR}/temp_ogbe2006" "${dABR}/temp_ogbe2007" "${dABR}/temp_ogbe2008" ///
 		"${dABR}/temp_ogbe2009" "${dABR}/temp_ogbe2010" "${dABR}/temp_ogbe2011" ///
 		"${dABR}/temp_ogbe2012" "${dABR}/temp_ogbe2013" "${dABR}/temp_ogbe2014" ///
 		"${dABR}/temp_ogbe2015" "${dABR}/temp_ogbe2016" "${dABR}/temp_ogbe2017" ///
 		"${dABR}/temp_ogbe2018" "${dABR}/temp_ogbe2019" "${dABR}/temp_ogbe2020" ///
-		"${dABR}/temp_ogbe2021" "${dABR}/temp_ogbe2022"
+		"${dABR}/temp_ogbe2021" "${dABR}/temp_ogbe2022" "${dABR}/temp_ogbe2023"
 		
 	gsort year ogid beid
 	
-	save "${dABR}/ogbe_link_2006_2023", replace	
+	save "${dABR}/ogbe_link_2006_2024", replace	
 	
 	*Delete temporary files
-	foreach year of num 2006/2023 {
+	foreach year of num 2006/2024 {
 		erase "${dABR}/temp_ogbe`year'.dta"
 	}
 	*
@@ -335,7 +337,7 @@
 * Preparing ABR_BE_EVENTS
 ********************************************************************************
 
-	foreach year of num 2006/2023 {
+	foreach year of num 2006/2024 {
 		
 		import spss using "${abr_BE_event`year'}", case(lower) clear
 		
@@ -390,20 +392,20 @@
 	}
 	*
 	
-	// Append files to create yearly OG-BE event link file 2006-2023
+	// Append files to create yearly OG-BE event link file 2006-2024
 	append using "${dABR}/temp_event2006" "${dABR}/temp_event2007" "${dABR}/temp_event2008" ///
 		"${dABR}/temp_event2009" "${dABR}/temp_event2010" "${dABR}/temp_event2011" ///
 		"${dABR}/temp_event2012" "${dABR}/temp_event2013" "${dABR}/temp_event2014" ///
 		"${dABR}/temp_event2015" "${dABR}/temp_event2016" "${dABR}/temp_event2017" ///
 		"${dABR}/temp_event2018" "${dABR}/temp_event2019" "${dABR}/temp_event2020" ///
-		"${dABR}/temp_event2021" "${dABR}/temp_event2022"
+		"${dABR}/temp_event2021" "${dABR}/temp_event2022" "${dABR}/temp_event2023"
 	
 	gsort year ogid beid ogbe_start
 	
-	save "${dABR}/ogbe_event_2006_2023", replace	
+	save "${dABR}/ogbe_event_2006_2024", replace	
 	
 	*Delete temporary files
-	foreach year of num 2006/2023 {
+	foreach year of num 2006/2024 {
 		erase "${dABR}/temp_event`year'.dta"
 	}
 	*
@@ -413,10 +415,10 @@
 * Merge
 ********************************************************************************
 
-	use "${dABR}/nidio_abr_og_register_2006_2023", replace
+	use "${dABR}/nidio_abr_og_register_2006_2024", replace
 	
 	// First merge: ABR_OG & ABR_BE
-	merge 1:m year ogid using "${dABR}/be_register_2006_2023", keep(master match) ///
+	merge 1:m year ogid using "${dABR}/be_register_2006_2024", keep(master match) ///
 		nogen
 	
 	* Remove empty decimals in variable be_employees
@@ -425,21 +427,21 @@
 	// Second merge: ABR_OGBE & ABR_OGBE_Link
 	gsort year ogid beid
 	
-	merge 1:1 year ogid beid using "${dABR}/ogbe_link_2006_2023", keep(master match) ///
+	merge 1:1 year ogid beid using "${dABR}/ogbe_link_2006_2024", keep(master match) ///
 		nogen
 		
 	// Select only employers: Remove BEs not appearing in SPOLIS
 	gsort year beid
-	merge m:1 year beid using "${dSPOLIS}/nidio_spolis_beid_register_2006_2023", ///
+	merge m:1 year beid using "${dSPOLIS}/nidio_spolis_beid_register_2006_2024", ///
 		keep(match) nogen
 	
 	// Third merge: ABR_OGBE & ABR_OGBE_event
 	gsort year ogid beid ogbe_start
-	merge 1:1 year ogid beid ogbe_start using "${dABR}/ogbe_event_2006_2023", ///
+	merge 1:1 year ogid beid ogbe_start using "${dABR}/ogbe_event_2006_2024", ///
 		keep(master match) keepusing(ogbe_event) nogen
 	rename ogbe_event ogbe_start_event
 	gsort year ogid beid ogbe_end
-	merge 1:1 year ogid beid ogbe_end using "${dABR}/ogbe_event_2006_2023", ///
+	merge 1:1 year ogid beid ogbe_end using "${dABR}/ogbe_event_2006_2024", ///
 		keep(master match) keepusing(ogbe_event) nogen
 	rename ogbe_event ogbe_end_event
 	order ogbe_start_event ogbe_end_event, after(ogbe_end)
@@ -453,17 +455,17 @@
 	// Sort dataset & save
 	gsort year ogid beid
 		
-	save "${dABR}/nidio_abr_ogbe_register_2006_2023", replace
+	save "${dABR}/nidio_abr_ogbe_register_2006_2024", replace
 	
-	erase "${dABR}/ogbe_link_2006_2023.dta"
-	erase "${dABR}/be_register_2006_2023.dta"
-	erase "${dABR}/ogbe_event_2006_2023.dta"
+	erase "${dABR}/ogbe_link_2006_2024.dta"
+	erase "${dABR}/be_register_2006_2024.dta"
+	erase "${dABR}/ogbe_event_2006_2024.dta"
 	
 	// Create reduced list containing only one observation per OG-year for 
 	// matching with OG-KVK register.
 	keep year ogid
 	gduplicates drop year ogid, force
-	save "${dABR}/abr_ogbe_list_2006_2023", replace
+	save "${dABR}/abr_ogbe_list_2006_2024", replace
 	
 * --------------------------------------------------------------------------- */
 * 3. OG-KVK LONGITUDINAL FILE
@@ -473,7 +475,7 @@
 * Preparing ABR_OG_pers
 ********************************************************************************
 	
-	foreach year of num 2006/2023 {
+	foreach year of num 2006/2024 {
 		
 		import spss using "${abr_OG_pers`year'}", case(lower) clear
 		
@@ -519,20 +521,20 @@
 	}
 	*
 	
-	// Append files to create yearly OG-VEP link file 2006-2023
+	// Append files to create yearly OG-VEP link file 2006-2024
 	append using "${dABR}/temp_ogvep2006" "${dABR}/temp_ogvep2007" "${dABR}/temp_ogvep2008" ///
 		"${dABR}/temp_ogvep2009" "${dABR}/temp_ogvep2010" "${dABR}/temp_ogvep2011" ///
 		"${dABR}/temp_ogvep2012" "${dABR}/temp_ogvep2013" "${dABR}/temp_ogvep2014" ///
 		"${dABR}/temp_ogvep2015" "${dABR}/temp_ogvep2016" "${dABR}/temp_ogvep2017" ///
 		"${dABR}/temp_ogvep2018" "${dABR}/temp_ogvep2019" "${dABR}/temp_ogvep2020" ///
-		"${dABR}/temp_ogvep2021" "${dABR}/temp_ogvep2022"
+		"${dABR}/temp_ogvep2021" "${dABR}/temp_ogvep2022" "${dABR}/temp_ogvep2023"
 		
 	gsort year ogid vepid
 	
-	save "${dABR}/ogvep_link_2006_2023", replace	
+	save "${dABR}/ogvep_link_2006_2024", replace	
 	
 	*Delete temporary files
-	foreach year of num 2006/2023 {
+	foreach year of num 2006/2024 {
 		erase "${dABR}/temp_ogvep`year'.dta"
 	}
 	*
@@ -541,7 +543,7 @@
 * Preparing ABR_CBS_KVK
 ********************************************************************************
 	
-	foreach year of num 2006/2023 {
+	foreach year of num 2006/2024 {
 		
 		import spss using "${abr_CBS_KVK`year'}", case(lower) clear
 		
@@ -588,7 +590,7 @@
 		
 		// Data issue: 2022 & 2023 with many duplicates despite consistent KvK / Finr
 		// Solution: Take min max dates within calendar year & drop duplicates
-		if `year'==2022 | `year'==2023 {
+		if `year'==2022 | `year'==2023 | `year'==2024 {
 			gegen vep_s=min(vepkvk_start), by(vepid)
 			gegen vep_e=max(vepkvk_end), missing by(vepid)
 		
@@ -609,20 +611,21 @@
 	}
 	*
 	
-	// Append files to create yearly VEP-KVK link file 2006-2023
+	// Append files to create yearly VEP-KVK link file 2006-2024
 	append using "${dABR}/temp_vepkvk2006" "${dABR}/temp_vepkvk2007" ///
 		"${dABR}/temp_vepkvk2008" "${dABR}/temp_vepkvk2009" "${dABR}/temp_vepkvk2010" ///
 		"${dABR}/temp_vepkvk2011" "${dABR}/temp_vepkvk2012" "${dABR}/temp_vepkvk2013" /// 
 		"${dABR}/temp_vepkvk2014" "${dABR}/temp_vepkvk2015" "${dABR}/temp_vepkvk2016" /// 
 		"${dABR}/temp_vepkvk2017" "${dABR}/temp_vepkvk2018" "${dABR}/temp_vepkvk2019" ///
-		"${dABR}/temp_vepkvk2020" "${dABR}/temp_vepkvk2021" "${dABR}/temp_vepkvk2022"
+		"${dABR}/temp_vepkvk2020" "${dABR}/temp_vepkvk2021" "${dABR}/temp_vepkvk2022" ///
+		"${dABR}/temp_vepkvk2023"
 		
 	gsort year vepid
 	
-	save "${dABR}/vepkvk_link_2006_2023", replace	
+	save "${dABR}/vepkvk_link_2006_2024", replace	
 	
 	*Delete temporary files
-	foreach year of num 2006/2023 {
+	foreach year of num 2006/2024 {
 		erase "${dABR}/temp_vepkvk`year'.dta"
 	}
 	*
@@ -631,20 +634,20 @@
 * Merge
 ********************************************************************************
 
-	use "${dABR}/nidio_abr_og_register_2006_2023", replace
+	use "${dABR}/nidio_abr_og_register_2006_2024", replace
 	
 	// Select only employers: Remove OG-years not appearing in SPOLIS (via BE)
 	gsort year ogid
-	merge 1:1 year ogid using "${dABR}/abr_ogbe_list_2006_2023", ///
+	merge 1:1 year ogid using "${dABR}/abr_ogbe_list_2006_2024", ///
 		keep(match) nogen
 	
 	// First merge: ABR_OG & ABR_OG_VEP
-	merge 1:m year ogid using "${dABR}/ogvep_link_2006_2023", keep(master match) ///
+	merge 1:m year ogid using "${dABR}/ogvep_link_2006_2024", keep(master match) ///
 		nogen
 	
 	// Second merge: ABR_OGVEP & ABR_VEP_KVK
 	gsort year vepid
-	merge m:1 year vepid using "${dABR}/vepkvk_link_2006_2023", keep(master match) ///
+	merge m:1 year vepid using "${dABR}/vepkvk_link_2006_2024", keep(master match) ///
 		nogen
 	
 	// Create variable containing number of VEP per year-OG
@@ -660,17 +663,17 @@
 	
 	gsort year ogid vepid
 		
-	save "${dABR}/nidio_abr_ogkvk_register_2006_2023", replace
+	save "${dABR}/nidio_abr_ogkvk_register_2006_2024", replace
 	
-	erase "${dABR}/abr_ogbe_list_2006_2023.dta"
-	erase "${dABR}/ogvep_link_2006_2023.dta"
-	erase "${dABR}/vepkvk_link_2006_2023.dta"
+	erase "${dABR}/abr_ogbe_list_2006_2024.dta"
+	erase "${dABR}/ogvep_link_2006_2024.dta"
+	erase "${dABR}/vepkvk_link_2006_2024.dta"
 	
 * --------------------------------------------------------------------------- */
 * 4. OG SIZE FILE
 * ---------------------------------------------------------------------------- *
 
-	use "${dABR}/nidio_abr_ogbe_register_2006_2023", replace
+	use "${dABR}/nidio_abr_ogbe_register_2006_2024", replace
 	
 	* Calculate the total number of employees per OG-year. OG-years with only
 	* one BE attached already hold final number. Complication: in case of multiple 
@@ -707,13 +710,13 @@
 	labels_nidio, module(abr)
 	
 	* Save file
-	save "${dABR}/nidio_abr_og_size_2006_2023", replace
+	save "${dABR}/nidio_abr_og_size_2006_2024", replace
 
 * --------------------------------------------------------------------------- */
 * 5. BE-KVK LONGITUDINAL FILE
 * ---------------------------------------------------------------------------- *
 
-	foreach year of num 2006/2023 {
+	foreach year of num 2006/2024 {
 		
 		import spss using "${abr_BE_pers`year'}", case(lower) clear
 		
@@ -762,20 +765,20 @@
 	}
 	*
 	
-	// Append files to create yearly OG-VEP link file 2006-2023
+	// Append files to create yearly OG-VEP link file 2006-2024
 	append using "${dABR}/temp_bevep2006" "${dABR}/temp_bevep2007" "${dABR}/temp_bevep2008" ///
 		"${dABR}/temp_bevep2009" "${dABR}/temp_bevep2010" "${dABR}/temp_bevep2011" ///
 		"${dABR}/temp_bevep2012" "${dABR}/temp_bevep2013" "${dABR}/temp_bevep2014" ///
 		"${dABR}/temp_bevep2015" "${dABR}/temp_bevep2016" "${dABR}/temp_bevep2017" ///
 		"${dABR}/temp_bevep2018" "${dABR}/temp_bevep2019" "${dABR}/temp_bevep2020" ///
-		"${dABR}/temp_bevep2021" "${dABR}/temp_bevep2022"
+		"${dABR}/temp_bevep2021" "${dABR}/temp_bevep2022" "${dABR}/temp_bevep2023"
 		
 	gsort year beid vepid
 	
-	save "${dABR}/bevep_link_2006_2023", replace	
+	save "${dABR}/bevep_link_2006_2024", replace	
 	
 	*Delete temporary files
-	foreach year of num 2006/2023 {
+	foreach year of num 2006/2024 {
 		erase "${dABR}/temp_bevep`year'.dta"
 	}
 	*
@@ -784,7 +787,7 @@
 * Preparing ABR_CBS_KVK
 ********************************************************************************
 	
-	foreach year of num 2006/2023 {
+	foreach year of num 2006/2024 {
 		
 		import spss using "${abr_CBS_KVK`year'}", case(lower) clear
 		
@@ -829,9 +832,9 @@
 			replace vepkvk_end = .
 		}
 		
-		// Data issue: 2022 & 2023 with many duplicates despite consistent KvK / Finr
+		// Data issue: 2022 - 2024 with many duplicates despite consistent KvK / Finr
 		// Solution: Take min max dates within calendar year & drop duplicates
-		if `year'==2022 | `year'==2023 {
+		if `year'==2022 | `year'==2023 | `year'==2024 {
 			gegen vep_s=min(vepkvk_start), by(vepid)
 			gegen vep_e=max(vepkvk_end), missing by(vepid)
 		
@@ -852,20 +855,21 @@
 	}
 	*
 	
-	// Append files to create yearly VEP-KVK link file 2006-2023
+	// Append files to create yearly VEP-KVK link file 2006-2024
 	append using "${dABR}/temp_vepkvk2006" "${dABR}/temp_vepkvk2007" ///
 		"${dABR}/temp_vepkvk2008" "${dABR}/temp_vepkvk2009" "${dABR}/temp_vepkvk2010" ///
 		"${dABR}/temp_vepkvk2011" "${dABR}/temp_vepkvk2012" "${dABR}/temp_vepkvk2013" /// 
 		"${dABR}/temp_vepkvk2014" "${dABR}/temp_vepkvk2015" "${dABR}/temp_vepkvk2016" /// 
 		"${dABR}/temp_vepkvk2017" "${dABR}/temp_vepkvk2018" "${dABR}/temp_vepkvk2019" ///
-		"${dABR}/temp_vepkvk2020" "${dABR}/temp_vepkvk2021" "${dABR}/temp_vepkvk2022"
+		"${dABR}/temp_vepkvk2020" "${dABR}/temp_vepkvk2021" "${dABR}/temp_vepkvk2022" ///
+		"${dABR}/temp_vepkvk2023"
 		
 	gsort year vepid
 	
-	save "${dABR}/vepkvk_link_2006_2023", replace	
+	save "${dABR}/vepkvk_link_2006_2024", replace	
 	
 	*Delete temporary files
-	foreach year of num 2006/2023 {
+	foreach year of num 2006/2024 {
 		erase "${dABR}/temp_vepkvk`year'.dta"
 	}
 	*
@@ -874,19 +878,19 @@
 * Merge
 ********************************************************************************
 
-	use "${dABR}/nidio_abr_ogbe_register_2006_2023", replace
+	use "${dABR}/nidio_abr_ogbe_register_2006_2024", replace
 	
 	// Reduce variable set
 	keep year beid be_start be_end
 	
 	
 	// First merge: ABR_BE & ABR_BE_VEP
-	merge 1:m year beid using "${dABR}/bevep_link_2006_2023", keep(master match) ///
+	merge 1:m year beid using "${dABR}/bevep_link_2006_2024", keep(master match) ///
 		nogen
 	
 	// Second merge: ABR_BEVEP & ABR_VEP_KVK
 	gsort year vepid
-	merge m:1 year vepid using "${dABR}/vepkvk_link_2006_2023", keep(master match) ///
+	merge m:1 year vepid using "${dABR}/vepkvk_link_2006_2024", keep(master match) ///
 		nogen
 	
 	// Create variable containing number of VEP per year-BE
@@ -902,7 +906,7 @@
 	
 	gsort year beid vepid
 		
-	save "${dABR}/nidio_abr_bekvk_register_2006_2023", replace
+	save "${dABR}/nidio_abr_bekvk_register_2006_2024", replace
 	
-	erase "${dABR}/bevep_link_2006_2023.dta"
-	erase "${dABR}/vepkvk_link_2006_2023.dta"
+	erase "${dABR}/bevep_link_2006_2024.dta"
+	erase "${dABR}/vepkvk_link_2006_2024.dta"
