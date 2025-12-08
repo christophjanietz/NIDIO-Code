@@ -3,7 +3,7 @@
 *==============================================================================*
  	Project: NIDIO
 	Author: Christoph Janietz (c.janietz@rug.nl)
-	Last update: 28-08-2025
+	Last update: 08-12-2025
 * ---------------------------------------------------------------------------- *
 
 	INDEX: 
@@ -24,7 +24,7 @@
 * 1. PREPARE EDGELIST OF BEID CHANGES
 * ---------------------------------------------------------------------------- *
 
-	foreach year of num 2007/2023 {
+	foreach year of num 2007/2024 {
 		
 		import spss using "${bdk_kopp_`year'}", case(lower) clear
 		
@@ -38,7 +38,7 @@
 	}
 	*
 	
-	foreach year of num 2007/2023 {
+	foreach year of num 2007/2024 {
 		
 		import spss using "${bdk_kopp_`year'}", case(lower) clear
 		
@@ -51,7 +51,7 @@
 	}
 	*
 	
-	foreach year of num 2007/2022 {
+	foreach year of num 2007/2023 {
 		
 		import spss using "${bdk_kopp_switch_`year'}", case(lower) clear
 		
@@ -64,7 +64,7 @@
 	}
 	*
 	
-	foreach year of num 2007/2022 {
+	foreach year of num 2007/2023 {
 		
 		import spss using "${bdk_kopp_switch_`year'}", case(lower) clear
 		
@@ -78,7 +78,7 @@
 	}
 	*
 	
-	use "${dBDK}/temp_kopp2023_A", replace
+	use "${dBDK}/temp_kopp2024_A", replace
 	 
 	// Append files to create edgelist to identify 
 	append using "${dBDK}/temp_kopp2007_A" "${dBDK}/temp_kopp2008_A" ///
@@ -86,39 +86,40 @@
 		"${dBDK}/temp_kopp2012_A" "${dBDK}/temp_kopp2013_A" "${dBDK}/temp_kopp2014_A" ///
 		"${dBDK}/temp_kopp2015_A" "${dBDK}/temp_kopp2016_A" "${dBDK}/temp_kopp2017_A" ///
 		"${dBDK}/temp_kopp2018_A" "${dBDK}/temp_kopp2019_A" "${dBDK}/temp_kopp2020_A" ///
-		"${dBDK}/temp_kopp2021_A" "${dBDK}/temp_kopp2022_A" ///
+		"${dBDK}/temp_kopp2021_A" "${dBDK}/temp_kopp2022_A" "${dBDK}/temp_kopp2023_A" ///
 		"${dBDK}/temp_kopp2009_B" "${dBDK}/temp_kopp2010_B" "${dBDK}/temp_kopp2011_B" ///
 		"${dBDK}/temp_kopp2012_B" "${dBDK}/temp_kopp2013_B" "${dBDK}/temp_kopp2014_B" ///
 		"${dBDK}/temp_kopp2015_B" "${dBDK}/temp_kopp2016_B" "${dBDK}/temp_kopp2017_B" ///
 		"${dBDK}/temp_kopp2018_B" "${dBDK}/temp_kopp2019_B" "${dBDK}/temp_kopp2020_B" ///
 		"${dBDK}/temp_kopp2021_B" "${dBDK}/temp_kopp2022_B" "${dBDK}/temp_kopp2023_B" ///
+		"${dBDK}/temp_kopp2024_B" ///
 		"${dBDK}/temp_switch2007_A" "${dBDK}/temp_switch2008_A" ///
 		"${dBDK}/temp_switch2009_A" "${dBDK}/temp_switch2010_A" "${dBDK}/temp_switch2011_A" ///
 		"${dBDK}/temp_switch2012_A" "${dBDK}/temp_switch2013_A" "${dBDK}/temp_switch2014_A" ///
 		"${dBDK}/temp_switch2015_A" "${dBDK}/temp_switch2016_A" "${dBDK}/temp_switch2017_A" ///
 		"${dBDK}/temp_switch2018_A" "${dBDK}/temp_switch2019_A" "${dBDK}/temp_switch2020_A" ///
-		"${dBDK}/temp_switch2021_A" "${dBDK}/temp_switch2022_A" ///
+		"${dBDK}/temp_switch2021_A" "${dBDK}/temp_switch2022_A" "${dBDK}/temp_switch2023_A" ///
 		"${dBDK}/temp_switch2007_B" "${dBDK}/temp_switch2008_B" ///
 		"${dBDK}/temp_switch2009_B" "${dBDK}/temp_switch2010_B" "${dBDK}/temp_switch2011_B" ///
 		"${dBDK}/temp_switch2012_B" "${dBDK}/temp_switch2013_B" "${dBDK}/temp_switch2014_B" ///
 		"${dBDK}/temp_switch2015_B" "${dBDK}/temp_switch2016_B" "${dBDK}/temp_switch2017_B" ///
 		"${dBDK}/temp_switch2018_B" "${dBDK}/temp_switch2019_B" "${dBDK}/temp_switch2020_B" ///
-		"${dBDK}/temp_switch2021_B" "${dBDK}/temp_switch2022_B" 
+		"${dBDK}/temp_switch2021_B" "${dBDK}/temp_switch2022_B" "${dBDK}/temp_switch2023_B"
 		
 	gsort year ego
 	
 	// Drop duplicates
 	duplicates drop year ego alter, force
 	
-	save "H:/bdk_lbeid_2007_2023", replace
+	save "H:/bdk_lbeid_2007_2024", replace
 	
 	*Delete temporary files
-	foreach year of num 2007/2023 {
+	foreach year of num 2007/2024 {
 		erase "${dBDK}/temp_kopp`year'_A.dta"
 		erase "${dBDK}/temp_kopp`year'_B.dta"
 	}
 	*
-	foreach year of num 2007/2022 {
+	foreach year of num 2007/2023 {
 		erase "${dBDK}/temp_switch`year'_A.dta"
 		erase "${dBDK}/temp_switch`year'_B.dta"
 	}
@@ -148,5 +149,6 @@
 	save "${dBDK}/nidio_bdk_lbeid", replace
 	
 	// Delete edgelist file
-	erase "H:/bdk_lbeid_2007_2023.dta"
+	erase "H:/bdk_lbeid_2007_2024.dta"
 	erase "H:/bdk_lbeid.dta"
+
