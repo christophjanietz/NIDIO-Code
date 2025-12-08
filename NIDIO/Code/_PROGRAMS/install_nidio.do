@@ -3,7 +3,7 @@
 *==============================================================================*
  	Project: Beyond Boardroom / NIDIO
 	Author: Christoph Janietz (c.janietz@rug.nl)
-	Last update: 08-08-2025
+	Last update: 08-12-2025
 * ---------------------------------------------------------------------------- *
 
 	INDEX:  
@@ -80,11 +80,13 @@ program define install_nidio
 		else if "`namelist'"=="EBB" {
 			display as txt "Module '`namelist'' requested for installation."
 			quietly do "${sEBB}/dataprep_EBB"
+			quietly do "${sEBB}/dataprep_EBB_occ"
 			display as txt "Installation of module '`namelist'' completed." 
 		}
 		else if "`namelist'"=="NEA" {
 			display as txt "Module '`namelist'' requested for installation."
 			quietly do "${sNEA}/dataprep_NEA"
+			quietly do "${sNEA}/dataprep_NEA_occ"
 			display as txt "Installation of module '`namelist'' completed." 
 		}
 		else {
