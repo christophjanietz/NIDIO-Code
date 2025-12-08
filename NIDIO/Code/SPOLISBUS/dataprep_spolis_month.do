@@ -3,20 +3,20 @@
 *==============================================================================*
  	Project: NIDIO
 	Author: Christoph Janietz (c.janietz@rug.nl)
-	Last update: 09-04-2025
+	Last update: 08-12-2025
 * ---------------------------------------------------------------------------- *
 
 	INDEX: 
 		1. 	POLIS (2006-2009)
-		2.  SPOLIS (2010-2023) 
+		2.  SPOLIS (2010-2024) 
 		3.  APPEND YEARLY FILES
 		
 * Short description of output:
 *
 * - Longitudinal job files (Unit: Job/months)
 *
-* nidio_spolis_month_2006_2023: 
-* Unique job observations existing in September between 2006 and 2023. Compensation 
+* nidio_spolis_month_2006_2024: 
+* Unique job observations existing in September between 2006 and 2024. Compensation 
 * and working hours as in September of the given calendar year.
 	
 * --------------------------------------------------------------------------- */
@@ -230,11 +230,11 @@
 	*
 
 * --------------------------------------------------------------------------- */
-* 2. SPOLIS (2010-2023)
+* 2. SPOLIS (2010-2024)
 * ---------------------------------------------------------------------------- *
 
 
-	foreach year of num 2010/2023 {
+	foreach year of num 2010/2024 {
 		use rinpersoons rinpersoon ikvid sdatumaanvangiko sdatumeindeiko sbaandagen ///
 			sbasisloon sbasisuren sbijzonderebeloning sextrsal sincidentsal slningld ///
 			slnowrk soverwerkuren svakbsl svoltijddagen scontractsoort spolisdienstverband ///
@@ -343,7 +343,7 @@
 	gsort rinpersoon ikvid
 	save "${dSPOLIS}/spolislongbaantab", replace
 	
-	foreach year of num 2010/2023 {
+	foreach year of num 2010/2024 {
 		
 		use "${dSPOLIS}/spolis_month_`year'", replace
 	
@@ -366,7 +366,7 @@
 	
 	// Merge main job identifier
 	
-	foreach year of num 2010/2023 {
+	foreach year of num 2010/2024 {
 		
 		* Prepare SPOLISHOOFDBAANBUS
 		import spss using "${mainjob`year'}", case(lower) clear
@@ -437,14 +437,7 @@
 	append using "${dSPOLIS}/spolis_month_2007" "${dSPOLIS}/spolis_month_2008" ///
 		"${dSPOLIS}/spolis_month_2009" "${dSPOLIS}/spolis_month_2010" ///
 		"${dSPOLIS}/spolis_month_2011" "${dSPOLIS}/spolis_month_2012" ///
-		"${dSPOLIS}/spolis_month_2013" "${dSPOLIS}/spolis_month_2014" ///
-		"${dSPOLIS}/spolis_month_2015" "${dSPOLIS}/spolis_month_2016" ///
-		"${dSPOLIS}/spolis_month_2017" "${dSPOLIS}/spolis_month_2018" ///
-		"${dSPOLIS}/spolis_month_2019" "${dSPOLIS}/spolis_month_2020" ///
-		"${dSPOLIS}/spolis_month_2021" "${dSPOLIS}/spolis_month_2022" ///
-		"${dSPOLIS}/spolis_month_2023"
-		
-	order ikvid, after(baanrugid)
+		"${dSPOLIS}/spolis_month_2013"
 	
 	// Job tenure
 	// Fill missing job tenure before 2013 with later observed job starting date 
@@ -460,19 +453,27 @@
 	drop min
 	// Code as missing if assigned 01-01-2006 (this date is assigned if left-censored)
 	replace job_tenure = . if job_tenure==16802
-	
+
 	gsort rinpersoon year slbaanid
+
+	append "${dSPOLIS}/spolis_month_2014" ///
+		"${dSPOLIS}/spolis_month_2015" "${dSPOLIS}/spolis_month_2016" ///
+		"${dSPOLIS}/spolis_month_2017" "${dSPOLIS}/spolis_month_2018" ///
+		"${dSPOLIS}/spolis_month_2019" "${dSPOLIS}/spolis_month_2020" ///
+		"${dSPOLIS}/spolis_month_2021" "${dSPOLIS}/spolis_month_2022" ///
+		"${dSPOLIS}/spolis_month_2023" "${dSPOLIS}/spolis_month_2024"
+
+	order ikvid, after(baanrugid)
 	
 	// Labels
 	labels_nidio, module(spolis)
 	
-	save "${dSPOLIS}/nidio_spolis_month_2006_2023", replace
+	save "${dSPOLIS}/nidio_spolis_month_2006_2024", replace
 	
 	* Erase yearly files
-	foreach year of num 2006/2023 {
+	foreach year of num 2006/2024 {
 		erase "${dSPOLIS}/spolis_month_`year'.dta"
 	}
 	*	
 	
 	clear
-	
