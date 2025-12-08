@@ -3,7 +3,7 @@
 *==============================================================================*
  	Project: NIDIO
 	Author: Christoph Janietz (c.janietz@rug.nl)
-	Last update: 17-02-2025
+	Last update: 08-12-2025
 * ---------------------------------------------------------------------------- *
 
 	INDEX: 
@@ -13,7 +13,7 @@
 *
 * - Longitudinal register of BE IDs with observations in (S)POLIS.
 *
-* nidio_spolis_be_register_2006_2023: 
+* nidio_spolis_be_register_2006_2024: 
 * File that lists all BEs with at least one employee registered in the SPOLIS.
 
 * --------------------------------------------------------------------------- */
@@ -38,7 +38,7 @@
 	}
 	*
 	
-	foreach year of num 2010/2023 {
+	foreach year of num 2010/2024 {
 		
 		use sbeid using "${spolis`year'}", replace
 		
@@ -58,14 +58,14 @@
 	}
 	*
 	
-	// Append files to create yearly OG register 2006-2023
-	use "`temp_beid2023'", replace
+	// Append files to create yearly OG register 2006-2024
+	use "`temp_beid2024'", replace
 	append using "`temp_beid2006'" "`temp_beid2007'" "`temp_beid2008'" ///
 		"`temp_beid2009'" "`temp_beid2010'" "`temp_beid2011'" ///
 		"`temp_beid2012'" "`temp_beid2013'" "`temp_beid2014'" ///
 		"`temp_beid2015'" "`temp_beid2016'" "`temp_beid2017'" ///
 		"`temp_beid2018'" "`temp_beid2019'" "`temp_beid2020'" ///
-		"`temp_beid2021'" "`temp_beid2022'"
+		"`temp_beid2021'" "`temp_beid2022'" "`temp_beid2023'"
 		
 	gsort year beid
 	
@@ -79,6 +79,6 @@
 	// Labels
 	labels_nidio, module(spolis)
 	
-	save "${dSPOLIS}/nidio_spolis_beid_register_2006_2023", replace	
+	save "${dSPOLIS}/nidio_spolis_beid_register_2006_2024", replace	
 	
 	clear
