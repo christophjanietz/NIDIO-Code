@@ -3,7 +3,7 @@
 *==============================================================================*
  	Project: NIDIO
 	Author: Christoph Janietz (c.janietz@rug.nl)
-	Last update: 27-09-2024
+	Last update: 08-12-2025
 * ---------------------------------------------------------------------------- *
 
 	INDEX: 
@@ -24,13 +24,13 @@
 
 	// CPI
 
-	set obs 18
+	set obs 19
 	gen year=.
 	gen CPI=.
 	
 	* Year
 	local j = 2006
-	forvalues i = 1/18 {
+	forvalues i = 1/19 {
 		replace year = `j' in `i'
 		local ++j
 	}
@@ -55,6 +55,7 @@
 	replace CPI = 1.1039 if year==2021
 	replace CPI = 1.2143 if year==2022
 	replace CPI = 1.2609 if year==2023
+	replace CPI = 1.3031 if year==2024
 	
 	save "${sdir}/_AUXILIARY/CPI/CPI.dta", replace
 	clear
@@ -62,13 +63,13 @@
 	
 	// CPI_month
 
-	set obs 18
+	set obs 19
 	gen year=.
 	gen CPI=.
 	
 	* Year
 	local j = 2006
-	forvalues i = 1/18 {
+	forvalues i = 1/19 {
 		replace year = `j' in `i'
 		local ++j
 	}
@@ -93,7 +94,9 @@
 	replace CPI = 1.1079 if year==2021
 	replace CPI = 1.2689 if year==2022
 	replace CPI = 1.2716 if year==2023
+	replace CPI = 1.3161 if year==2024
 	
 	save "${sdir}/_AUXILIARY/CPI/CPI_month.dta", replace
 	clear
+
 	
