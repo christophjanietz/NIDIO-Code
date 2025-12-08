@@ -3,7 +3,7 @@
 ################################################################################
 # Project: NIDIO
 # Author: Christoph Janietz (c.janietz@rug.nl)
-# Last update: 25-08-2025
+# Last update: 08-12-2025
 ################################################################################
 
 library(haven)
@@ -13,7 +13,7 @@ library(tidyverse)
 library(igraph)
 
 # Load data
-beid_networks <- read_dta("H:/bdk_lbeid_2007_2023.dta")
+beid_networks <- read_dta("H:/bdk_lbeid_2007_2024.dta")
 
 # Prepare adjacency list (all years)
 net <- beid_networks %>%
