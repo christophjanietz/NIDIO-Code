@@ -173,8 +173,4 @@ program define source_nidio
 		display as txt "spolis_long: ${spolis_long}"
 		display as txt "--------------------------------------------------------------"
 		
-	
-		
-
 end
-
