@@ -3,7 +3,7 @@
 *==============================================================================*
  	Project: NIDIO
 	Author: Christoph Janietz (c.janietz@rug.nl)
-	Last update: 02-10-2025
+	Last update: 08-12-2025
 * ---------------------------------------------------------------------------- */
 
 * This do-file has the following purpose:
@@ -80,7 +80,7 @@
 	   global abr_OG`year' =  "G:/Bedrijven/ABR/`year'/" + `abr_OG`year''
 	}
 	*
-	foreach year of num 2021/2023 {
+	foreach year of num 2021/2024 {
 	   local abr_OG`year': dir "G:/Bedrijven/ABR/`year'/" files "ABR_OG`year'V*.sav"
 	   global abr_OG`year' =  "G:/Bedrijven/ABR/`year'/" + `abr_OG`year''
 	}
@@ -103,7 +103,7 @@
 	   global abr_OG_event`year' =  "G:/Bedrijven/ABR/`year'/" + `abr_OG_event`year''
 	}
 	*
-	foreach year of num 2021/2023 {
+	foreach year of num 2021/2024 {
 	   local abr_OG_event`year': dir "G:/Bedrijven/ABR/`year'/" files "ABR_OG_evenbijdragen`year'V*.sav"
 	   global abr_OG_event`year' =  "G:/Bedrijven/ABR/`year'/" + `abr_OG_event`year''
 	}
@@ -126,7 +126,7 @@
 	   global abr_OG_pers`year' =  "G:/Bedrijven/ABR/`year'/" + `abr_OG_pers`year''
 	}
 	*
-	foreach year of num 2021/2023 {
+	foreach year of num 2021/2024 {
 	   local abr_OG_pers`year': dir "G:/Bedrijven/ABR/`year'/" files "ABR_OG_PERSOON`year'V*.sav"
 	   global abr_OG_pers`year' =  "G:/Bedrijven/ABR/`year'/" + `abr_OG_pers`year''
 	}
@@ -149,7 +149,7 @@
 	   global abr_OG_BE`year' =  "G:/Bedrijven/ABR/`year'/" + `abr_OG_BE`year''
 	}
 	*
-	foreach year of num 2021/2023 {
+	foreach year of num 2021/2024 {
 	   local abr_OG_BE`year': dir "G:/Bedrijven/ABR/`year'/" files "ABR_BE_OG`year'V*.sav"
 	   global abr_OG_BE`year' =  "G:/Bedrijven/ABR/`year'/" + `abr_OG_BE`year''
 	}
@@ -162,7 +162,7 @@
 	   global abr_BE`year' =  "G:/Bedrijven/ABR/`year'/" + `abr_BE`year''
 	}
 	*
-	foreach year of num 2021/2023 {
+	foreach year of num 2021/2024 {
 	   local abr_BE`year': dir "G:/Bedrijven/ABR/`year'/" files "ABR_BE`year'V*.sav"
 	   global abr_BE`year' =  "G:/Bedrijven/ABR/`year'/" + `abr_BE`year''
 	}
@@ -185,7 +185,7 @@
 	   global abr_BE_event`year' =  "G:/Bedrijven/ABR/`year'/" + `abr_BE_event`year''
 	}
 	*
-	foreach year of num 2021/2023 {
+	foreach year of num 2021/2024 {
 	   local abr_BE_event`year': dir "G:/Bedrijven/ABR/`year'/" files "ABR_BE_EVENTBIJDRAGEN`year'V*.sav"
 	   global abr_BE_event`year' =  "G:/Bedrijven/ABR/`year'/" + `abr_BE_event`year''
 	}
@@ -208,7 +208,7 @@
 	   global abr_BE_pers`year' =  "G:/Bedrijven/ABR/`year'/" + `abr_BE_pers`year''
 	}
 	*
-	foreach year of num 2021/2023 {
+	foreach year of num 2021/2024 {
 	   local abr_BE_pers`year': dir "G:/Bedrijven/ABR/`year'/" files "ABR_BE_PERSOON`year'V*.sav"
 	   global abr_BE_pers`year' =  "G:/Bedrijven/ABR/`year'/" + `abr_BE_pers`year''
 	}
@@ -226,28 +226,28 @@
 	   global abr_CBS_KVK`year' =  "G:/Bedrijven/ABR/`year'/" + `abr_CBS_KVK`year''
 	}
 	*
-	foreach year of num 2021/2023 {
+	foreach year of num 2021/2024 {
 	   local abr_CBS_KVK`year': dir "G:/Bedrijven/ABR/`year'/" files "ABR_CBS_persoon_KvK_FIN`year'V*.sav"
 	   global abr_CBS_KVK`year' =  "G:/Bedrijven/ABR/`year'/" + `abr_CBS_KVK`year''
 	}
 	*
 	
 	*BDK
-	foreach year of num 2007/2023 {
+	foreach year of num 2007/2024 {
 	   local bdk`year': dir "G:/Bedrijven/BDK/" files "BDK`year'V*.sav"
 	   global bdk`year' = "G:/Bedrijven/BDK/" + `bdk`year''
 	}
 	*
 	
 	*BDK - Within-Year Koppeltabel
-	foreach year of num 2007/2023 {
+	foreach year of num 2007/2024 {
 	   local bdk_kopp_`year': dir "G:/Bedrijven/BDK/" files "BDKKoppeltabelBE`year'V*.sav"
 	   global bdk_kopp_`year' = "G:/Bedrijven/BDK/" + `bdk_kopp_`year''
 	}
 	*
 	
 	*BDK - Year-Switch Koppeltabel
-	foreach year of num 2007/2023 {
+	foreach year of num 2007/2024 {
 	   local t2 = `year'+1
 	   local bdk_kopp_switch_`year': dir "G:/Bedrijven/BDK/" files "BDKKoppeltabelBE`year'`t2'V*.sav"
 	   global bdk_kopp_switch_`year' = "G:/Bedrijven/BDK/" + `bdk_kopp_switch_`year''
@@ -262,7 +262,7 @@
 	*
 	
 	*EBB
-	foreach year of num 2006/2023 {
+	foreach year of num 2006/2024 {
 	   local ebbnw`year': dir "G:/Arbeid/EBBnw/" files "EBBnw`year'V*.sav"
 	   global ebbnw`year' =  "G:/Arbeid/EBBnw/" + `ebbnw`year''
 	}
@@ -278,8 +278,8 @@
 	local GBAPERSOON2009: dir "G:/Bevolking/GBAPERSOONTAB/2009/" files "GBAPERSOON2009TABV*.sav"
 	global GBAPERSOON2009 = "G:/Bevolking/GBAPERSOONTAB/2009/" + `GBAPERSOON2009'
 	
-	local GBAPERSOON2023: dir "G:/Bevolking/GBAPERSOONTAB/2023/" files "GBAPERSOON2023TABV*.sav"
-	global GBAPERSOON2023 = "G:/Bevolking/GBAPERSOONTAB/2023/" + `GBAPERSOON2023'
+	local GBAPERSOON2024: dir "G:/Bevolking/GBAPERSOONTAB/2024/" files "GBAPERSOON2024TABV*.sav"
+	global GBAPERSOON2024 = "G:/Bevolking/GBAPERSOONTAB/2024/" + `GBAPERSOON2024'
 	
 	*HOOGSTEOPLTAB
 	// (Use .dta file format)
@@ -288,7 +288,7 @@
 	   global opl`year' =  "G:/Onderwijs/HOOGSTEOPLTAB/`year'/" + `opl`year''
 	}
 	*
-	foreach year of num 2013/2023 {
+	foreach year of num 2013/2024 {
 	   local opl`year': dir "G:/Onderwijs/HOOGSTEOPLTAB/`year'/" files "HOOGSTEOPL`year'TABV*.dta"
 	   global opl`year' =  "G:/Onderwijs/HOOGSTEOPLTAB/`year'/" + `opl`year''
 	}
@@ -309,7 +309,7 @@
 	   global partner`year' =  "G:/Bevolking/PARTNERBUS/`year'/" + `partner`year''
 	}
 	*
-	foreach year of num 2015/2023 {
+	foreach year of num 2015/2024 {
 	   local partner`year': dir "G:/Bevolking/PARTNERBUS/`year'/" files "PARTNER`year'BUSV*.sav"
 	   global partner`year' =  "G:/Bevolking/PARTNERBUS/`year'/" + `partner`year''
 	}
@@ -328,6 +328,9 @@
 	   global spolis`year' =  "G:/Spolis/SPOLISBUS/" + `spolis`year''
 	}
 	*
+	fs "G:/Spolis/SPOLISBUS/SPOLISBUS2024V*.dta"
+	local spolis2024 = word(r(files),-1)
+	global spolis2024 = "G:/Spolis/SPOLISBUS/" + `spolis2024'
 	
 	local polis_long: dir "G:/Polis/POLISLONGBAANTAB/" files "POLISLONGBAANTABV*.sav"
 	global polis_long = "G:/Polis/POLISLONGBAANTAB/" + `polis_long'
@@ -341,7 +344,7 @@
 	   global mainjob`year' =  "G:/Polis/POLISHOOFDBAANBUS/`year'/" + `mainjob`year''
 	}
 	*
-	foreach year of num 2010/2023 {
+	foreach year of num 2010/2024 {
 	   local mainjob`year': dir "G:/Spolis/SPOLISHOOFDBAANBUS/" files "SPOLISHOOFDBAAN`year'BUSV*.sav"
 	   global mainjob`year' =  "G:/Spolis/SPOLISHOOFDBAANBUS/" + `mainjob`year''
 	}
