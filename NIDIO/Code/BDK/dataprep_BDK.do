@@ -3,7 +3,7 @@
 *==============================================================================*
  	Project: Beyond Boardroom / NIDIO
 	Author: Christoph Janietz (c.janietz@rug.nl)
-	Last update: 10-04-2025
+	Last update: 08-12-2025
 * ---------------------------------------------------------------------------- *
 
 	INDEX: 
@@ -12,7 +12,7 @@
 		
 * Short description of output:
 *
-* - Demographic data of organizations 2007-2023
+* - Demographic data of organizations 2007-2024
 *
 *
 
@@ -20,7 +20,7 @@
 * 1. BDK BE REGISTER
 * ---------------------------------------------------------------------------- *
 
-	foreach year of num 2007/2023 {
+	foreach year of num 2007/2024 {
 		
 		import spss using "${bdk`year'}", case(lower) clear
 		
@@ -92,23 +92,23 @@
 	}
 	*
 	
-	// Append files to create yearly BDK register 2007-2023
+	// Append files to create yearly BDK register 2007-2024
 	append using "${dBDK}/temp_bdk2007" "${dBDK}/temp_bdk2008" ///
 		"${dBDK}/temp_bdk2009" "${dBDK}/temp_bdk2010" "${dBDK}/temp_bdk2011" ///
 		"${dBDK}/temp_bdk2012" "${dBDK}/temp_bdk2013" "${dBDK}/temp_bdk2014" ///
 		"${dBDK}/temp_bdk2015" "${dBDK}/temp_bdk2016" "${dBDK}/temp_bdk2017" ///
 		"${dBDK}/temp_bdk2018" "${dBDK}/temp_bdk2019" "${dBDK}/temp_bdk2020" ///
-		"${dBDK}/temp_bdk2021" "${dBDK}/temp_bdk2022"
+		"${dBDK}/temp_bdk2021" "${dBDK}/temp_bdk2022" "${dBDK}/temp_bdk2023"
 		
 	// Labeling
 	labels_nidio, module(bdk)
 		
 	gsort year beid
 	
-	save "${dBDK}/nidio_bdk_be_2007_2023", replace	
+	save "${dBDK}/nidio_bdk_be_2007_2024", replace	
 	
 	*Delete temporary files
-	foreach year of num 2007/2023 {
+	foreach year of num 2007/2024 {
 		erase "${dBDK}/temp_bdk`year'.dta"
 	}
 	*
