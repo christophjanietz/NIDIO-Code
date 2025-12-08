@@ -47,7 +47,7 @@ program define install_nidio
 		}
 		else if "`namelist'"=="SPOLIS_MONTH" {
 			display as txt "Module '`namelist'' requested for installation."
-			display as txt "Warning: ~32 hours installation time."
+			display as txt "Warning: ~40 hours installation time."
 			quietly do "${sSPOLIS}/dataprep_spolis_month"
 			display as txt "Installation of module '`namelist'' completed."
 		}
@@ -97,4 +97,5 @@ program define install_nidio
 		*
 		
 end
+
 
