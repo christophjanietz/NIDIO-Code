@@ -3,7 +3,7 @@
 *==============================================================================*
  	Project: NIDIO
 	Author: Christoph Janietz (c.janietz@rug.nl)
-	Last update: 02-10-2025
+	Last update: 08-12-2025
 * ---------------------------------------------------------------------------- *
 
 	INDEX: 
@@ -11,8 +11,8 @@
 		
 * Short description of output:
 *
-* nidio_kindouder_parents_2023:
-* - Register of parents up until 2023 (Unit: RIN).
+* nidio_kindouder_parents_2024:
+* - Register of parents up until 2024 (Unit: RIN).
 *
 
 * --------------------------------------------------------------------------- */
@@ -43,7 +43,7 @@
 	
 		// Merge birth date of child 
 		gsort rinpersoon
-		merge 1:1 rinpersoon using "${dGBA}/nidio_gba_rin_2023", keep(master match) nogen ///
+		merge 1:1 rinpersoon using "${dGBA}/nidio_gba_rin_2024", keep(master match) nogen ///
 			keepusing(rin_birthy rin_birthm)
 		
 		// Harmonize variable names
@@ -54,12 +54,12 @@
 		gen rin_mfchild = "`x'"
 		
 		// Save file
-		save "${dKIND}/kindouder_`x'_2023", replace
+		save "${dKIND}/kindouder_`x'_2024", replace
 	}
 	*
 	
 	// Append mother and father files 
-	append using "${dKIND}/kindouder_ma_2023" 
+	append using "${dKIND}/kindouder_ma_2024" 
 	
 	// Create variable holding number of registered children in most recent year
 	bys rinpersoon: gen rin_nrchildren= _N
@@ -72,18 +72,14 @@
 	order rinpersoon rin_nrchildren rin_mfchild rinchild child_birthy child_birthm ///
 		childparent_link rinalterp
 		
-	// Restrict to births until 2023
-	drop if child_birthy>2023
-		
 	// Labeling
 	labels_nidio, module(kind)
 	
 	gsort rinpersoon child_birthy child_birthm rinchild
 	
-	save "${dKIND}/nidio_kindouder_parents_2023", replace
+	save "${dKIND}/nidio_kindouder_parents_2024", replace
 	
-	erase "${dKIND}/kindouder_ma_2023.dta"
-	erase "${dKIND}/kindouder_pa_2023.dta"
+	erase "${dKIND}/kindouder_ma_2024.dta"
+	erase "${dKIND}/kindouder_pa_2024.dta"
 	
 	clear
-
