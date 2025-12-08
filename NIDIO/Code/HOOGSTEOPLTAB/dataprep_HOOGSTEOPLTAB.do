@@ -3,7 +3,7 @@
 *==============================================================================*
  	Project: NIDIO
 	Author: Christoph Janietz (c.janietz@rug.nl)
-	Last update: 23-10-2024
+	Last update: 08-12-2024
 * ---------------------------------------------------------------------------- *
 
 	INDEX: 
@@ -14,7 +14,7 @@
 *
 * - Longitudinal education file.
 *
-* nidio_opl_rin_2006_2023: 
+* nidio_opl_rin_2006_2024: 
 * description (Unit: RIN-years).
 *
 	
@@ -47,7 +47,7 @@
 * 2. APPENDING EDUCATION FILES
 * ---------------------------------------------------------------------------- *
 
-	foreach year of num 2006/2023 {
+	foreach year of num 2006/2024 {
 		use "${opl`year'}", replace
 	
 		// Consistent lower case of variable names
@@ -65,15 +65,15 @@
 		order year, before(rinpersoon)
 		
 		// Simplify variable names 
-		if year>=2013 & year<=2023 {
+		if year>=2013 & year<=2024 {
 			rename (oplnivsoi2016agg4hbmetnirwo oplnivsoi2016agg4hgmetnirwo) ///
 			(rin_edu_soi2016 rin_edu_soi2016_hg)
 		}
-		if year>=2016 & year<=2023 {
+		if year>=2016 & year<=2024 {
 			rename (richtdetailiscedf2013hbmetnirwo richtdetailiscedf2013hgmetnirwo) ///
 			(rin_edufield_soi2016 rin_edufield_soi2016_hg)
 		}
-		if year>=2019 & year<=2023 {
+		if year>=2019 & year<=2024 {
 			rename (oplnivsoi2021agg4hbmetnirwo oplnivsoi2021agg4hgmetnirwo ///
 			richtsoi2021scedf2013hbnirwo richtsoi2021scedf2013hgnirwo) ///
 			(rin_edu_soi2021 rin_edu_soi2021_hg rin_edufield_soi2021 ///
@@ -108,18 +108,18 @@
 	}
 	*
 	
-	// Append files to create yearly OG register 2006-2022
+	// Append files to create yearly OG register 2006-2024
 	use "`temp_opl2006'", replace
 	append using "`temp_opl2007'" "`temp_opl2008'" "`temp_opl2009'" ///
 		"`temp_opl2010'" "`temp_opl2011'" "`temp_opl2012'" ///
 		"`temp_opl2013'" "`temp_opl2014'" "`temp_opl2015'" ///
 		"`temp_opl2016'" "`temp_opl2017'" "`temp_opl2018'" ///
 		"`temp_opl2019'" "`temp_opl2020'" "`temp_opl2021'" ///
-		"`temp_opl2022'" "`temp_opl2023'"
+		"`temp_opl2022'" "`temp_opl2023'" "`temp_opl2024'"
 	
 	// Labelling
 	labels_nidio, module(opl)
 		
-	save "${dOPL}/nidio_opl_rin_2006_2023", replace
+	save "${dOPL}/nidio_opl_rin_2006_2024", replace
 	
 	clear
