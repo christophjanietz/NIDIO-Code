@@ -3,7 +3,7 @@
 *==============================================================================*
  	Project: NIDIO
 	Author: Zoltán Lippényi / Christoph Janietz
-	Last update: 23-10-2024
+	Last update: 08-12-2025
 * ---------------------------------------------------------------------------- *
 
 	INDEX: 
@@ -24,13 +24,13 @@
 	
 *** Settings - Years to trace relationship. Earliest year: 1995.
 	global partner_firstyear = 2006
-	global partner_lastyear = 2023
+	global partner_lastyear = 2024
 	
 * --------------------------------------------------------------------------- */
 * 1. PARTNERSHIP REGISTER
 * ---------------------------------------------------------------------------- *
 
-	import spss using "${partner2023}", case(lower) clear
+	import spss using "${partner2024}", case(lower) clear
 
 	// Convert date variables to Stata date format
 	gen partnership_start = date(aanvangpartner,"YMD")
