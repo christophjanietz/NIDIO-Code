@@ -3,7 +3,7 @@
 *==============================================================================*
  	Project: NIDIO
 	Author: Christoph Janietz (c.janietz@rug.nl)
-	Last update: 28-08-2025
+	Last update: 08-12-2025
 * ---------------------------------------------------------------------------- */
 
 *** Run configuration file (from current file path)
@@ -40,25 +40,27 @@
 	* The following modules are currently included in NIDIO:
 	
 	* ORGANIZATION LEVEL:
-	* - ABR: Company register (5 datasets; 3.36 GB (total))
-	* - BDK: Company demography (2 datasets; 1.75 GB (total))
+	* - ABR: Company register (5 datasets; 3.56 GB (total))
+	* - BDK: Company demography (2 datasets; 1.90 GB (total))
 	* - NFO: Financial data (2 datasets; 728 MB (total))
 	
 	* PERSON LEVEL:
-	* - EBB: Occupational codes via Dutch labor force survey (1 dataset; 144 MB)
-	* - GBAPERSOONTAB: Demographic characteristics (1 dataset; 0.98 GB)
-	* - HOOGSTEOPLTAB: Highest education (1 dataset; 5.61 GB)
-	* - KINDOUDERTAB: Registered children of parents (1 dataset; 1.1 GB)
-	* - NEA: Occupational codes via NEA (1 dataset; 15.3 MB)
-	* - PARTNERBUS: Partnership (1 dataset; 644 MB)
+	* - EBB: Occupational codes via Dutch labor force survey (2 datasets; 573 MB (total))
+	* - GBAPERSOONTAB: Demographic characteristics (1 dataset; 1.00 GB)
+	* - HOOGSTEOPLTAB: Highest education (1 dataset; 6.43 GB)
+	* - KINDOUDERTAB: Registered children of parents (1 dataset; 1.12 GB)
+	* - NEA: Occupational codes via NEA (2 datasets; 93.4 MB (total))
+	* - PARTNERBUS: Partnership (1 dataset; 660 MB)
 	
 	* JOB LEVEL:
-	* - SPOLIS_MONTH: Jobs existing in September during reference year (1 dataset; 37.1 GB)
+	* - SPOLIS_MONTH: Jobs existing in September during reference year (1 dataset; 38.7 GB)
 	* - SPOLIS_YEAR: All jobs existing during reference year (1 dataset; 50.8 GB)
 	
 	*--------------------------------------------------------------------------*
 	* Dependencies: SPOLIS is required for the installation of module 'ABR'.
 	* 			 	ABR is required for the installation of module 'NFO'.
+	*				SPOLIS is required for the installation of module 'EBB'.
+	*				SPOLIS & ABR are required for the installation of module 'NEA'.
 	*			 	GBA is required for the installation of module 'KIND'.
 	*--------------------------------------------------------------------------*
 	* Important:
@@ -69,4 +71,3 @@
 	*   IDs (BEID) without at least one job-level observation in SPOLIS are 
 	*   excluded during data processing.
 	*--------------------------------------------------------------------------*
-	
