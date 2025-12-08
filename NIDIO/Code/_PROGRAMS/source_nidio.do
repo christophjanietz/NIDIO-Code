@@ -3,7 +3,7 @@
 *==============================================================================*
  	Project: Beyond Boardroom / NIDIO
 	Author: Christoph Janietz (c.janietz@rug.nl)
-	Last update: 02-10-2025
+	Last update: 08-12-2025
 * ---------------------------------------------------------------------------- *
 
 	INDEX:  
@@ -28,56 +28,56 @@ program define source_nidio
 	* ABR 
 		display as result "ABR-OG:"
 		display as txt "--------------------------------------------------------------"
-			foreach year of num 2006/2023 {
+			foreach year of num 2006/2024 {
 				display as txt "`year': ${abr_OG`year'}"
 				display as txt "---"
 			}
 		display as txt "--------------------------------------------------------------"
 		display as result "*ABR-OG-EVENTS:"
 		display as txt "--------------------------------------------------------------"
-			foreach year of num 2006/2023 {
+			foreach year of num 2006/2024 {
 				display as txt "`year': ${abr_OG_event`year'}"
 				display as txt "---"
 			}
 		display as txt "--------------------------------------------------------------"
 		display as result "*ABR-OG-PERSON:"
 		display as txt "--------------------------------------------------------------"
-			foreach year of num 2006/2023 {
+			foreach year of num 2006/2024 {
 				display as txt "`year': ${abr_OG_pers`year'}"
 				display as txt "---"
 			}
 		display as txt "--------------------------------------------------------------"
 		display as result "*ABR-OG-BE:"
 		display as txt "--------------------------------------------------------------"
-			foreach year of num 2006/2023 {
+			foreach year of num 2006/2024 {
 				display as txt "`year': ${abr_OG_BE`year'}"
 				display as txt "---"
 			}
 		display as txt "--------------------------------------------------------------"
 		display as result "*ABR-BE:"
 		display as txt "--------------------------------------------------------------"
-			foreach year of num 2006/2023 {
+			foreach year of num 2006/2024 {
 				display as txt "`year': ${abr_BE`year'}"
 				display as txt "---"
 			}
 		display as txt "--------------------------------------------------------------"
 		display as result "*ABR-BE-EVENTS:"
 		display as txt "--------------------------------------------------------------"
-			foreach year of num 2006/2023 {
+			foreach year of num 2006/2024 {
 				display as txt "`year': ${abr_BE_event`year'}"
 				display as txt "---"
 			}
 		display as txt "--------------------------------------------------------------"
 		display as result "*ABR-BE-PERSON:"
 		display as txt "--------------------------------------------------------------"
-			foreach year of num 2006/2023 {
+			foreach year of num 2006/2024 {
 				display as txt "`year': ${abr_BE_pers`year'}"
 				display as txt "---"
 			}
 		display as txt "--------------------------------------------------------------"
 		display as result "*ABR-CBS-PERSON-KVK:"
 		display as txt "--------------------------------------------------------------"
-			foreach year of num 2006/2023 {
+			foreach year of num 2006/2024 {
 				display as txt "`year': ${abr_CBS_KVK`year'}"
 				display as txt "---"
 			}
@@ -85,8 +85,22 @@ program define source_nidio
 	* BDK
 		display as result "BDK:"
 		display as txt "--------------------------------------------------------------"
-			foreach year of num 2007/2023 {
+			foreach year of num 2007/2024 {
 				display as txt "`year': ${bdk`year'}"
+				display as txt "---"
+			}
+		display as txt "--------------------------------------------------------------"
+		display as result "BDK - Within-Year Koppeltabel:"
+		display as txt "--------------------------------------------------------------"
+			foreach year of num 2007/2024 {
+				display as txt "`year': ${bdk_kopp_`year'}"
+				display as txt "---"
+			}
+		display as txt "--------------------------------------------------------------"
+		display as result "BDK - Year-Switch Koppeltabel:"
+		display as txt "--------------------------------------------------------------"
+			foreach year of num 2007/2024 {
+				display as txt "`year': ${bdk_kopp_switch_`year'}"
 				display as txt "---"
 			}
 		display as txt "--------------------------------------------------------------"
@@ -101,7 +115,7 @@ program define source_nidio
 	* EBB
 		display as result "EBBnw:"
 		display as txt "--------------------------------------------------------------"
-			foreach year of num 2006/2023 {
+			foreach year of num 2006/2024 {
 				display as txt "`year': ${ebbnw`year'}"
 				display as txt "---"
 			}
@@ -109,12 +123,12 @@ program define source_nidio
 	* GBA
 		display as result "GBAPERSOONTAB:"
 		display as txt "--------------------------------------------------------------"
-		display as txt "2023: ${GBAPERSOON2023}"
+		display as txt "2024: ${GBAPERSOON2024}"
 		display as txt "--------------------------------------------------------------"
 	* OPL
 		display as result "HOOGSTEOPLTAB:"
 		display as txt "--------------------------------------------------------------"
-			foreach year of num 2006/2023 {
+			foreach year of num 2006/2024 {
 				display as txt "`year': ${opl`year'}"
 				display as txt "---"
 			}
@@ -133,7 +147,7 @@ program define source_nidio
 	* PARTNER
 		display as result "PARTNERBUS:"
 		display as txt "--------------------------------------------------------------"
-			foreach year of num 2010/2023 {
+			foreach year of num 2010/2024 {
 				display as txt "`year': ${partner`year'}"
 				display as txt "---"
 			}
@@ -151,7 +165,7 @@ program define source_nidio
 	* SPOLIS
 		display as result "SPOLIS:"
 		display as txt "--------------------------------------------------------------"
-			foreach year of num 2010/2023 {
+			foreach year of num 2010/2024 {
 				display as txt "`year': ${spolis`year'}"
 				display as txt "`year': ${mainjob`year'}"
 				display as txt "---"
@@ -163,3 +177,4 @@ program define source_nidio
 		
 
 end
+
