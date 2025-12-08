@@ -3,7 +3,7 @@
 *==============================================================================*
  	Project: NIDIO
 	Author: Christoph Janietz (c.janietz@rug.nl)
-	Last update: 10-04-2025
+	Last update: 08-12-2025
 * ---------------------------------------------------------------------------- *
 
 	INDEX:  
@@ -188,6 +188,15 @@ program define labels_nidio
 			capture lab var rin_svynr_EBB "Number of survey EBB (1-5)"
 			capture lab var rin_weight_EBB "Survey weight EBB (jaargewicht)"
 			capture lab var rin_ISCO08 "ISCO-08 occupation code"
+
+			// Value labels
+			* Employment position
+			capture lab def position_lbl 2 "Employee with permanent contract" ///
+				3 "Employee with flexible contract" ///
+				5 "Self-employed with personnel" ///
+				6 "Self-employed without personnel" 7 "Helping family member" ///
+				9 "Unknown", replace
+			capture lab val rin_position_EBB position_lbl
 		}
 		else if `"`module'"'=="funct" {
 			// Variable labels
@@ -520,5 +529,6 @@ program define labels_nidio
 			display as txt "--------------------------------------------------------"
 			display as err "Unknown module."
 		}	
+
 
 end
