@@ -437,33 +437,33 @@
 	append using "${dSPOLIS}/spolis_month_2007" "${dSPOLIS}/spolis_month_2008" ///
 		"${dSPOLIS}/spolis_month_2009" "${dSPOLIS}/spolis_month_2010" ///
 		"${dSPOLIS}/spolis_month_2011" "${dSPOLIS}/spolis_month_2012" ///
-		"${dSPOLIS}/spolis_month_2013"
-	
-	// Job tenure
-	// Fill missing job tenure before 2013 with later observed job starting date 
-	// within the same job (Jobs observed after 2013)
-	gegen min = min(job_tenure), by(rinpersoon slbaanid)
-	replace job_tenure = min if job_tenure==.
-	drop min
-	// Fill missing job tenure before 2013 with earliest observed job starting
-	// date within the same job (Jobs only observed before 2013)
-	gegen min = min(job_start_caly), by(rinpersoon slbaanid)
-	replace job_tenure = min if job_tenure==.
-	replace job_tenure = min if job_tenure>min
-	drop min
-	// Code as missing if assigned 01-01-2006 (this date is assigned if left-censored)
-	replace job_tenure = . if job_tenure==16802
-
-	gsort rinpersoon year slbaanid
-
-	append "${dSPOLIS}/spolis_month_2014" ///
+		"${dSPOLIS}/spolis_month_2013" "${dSPOLIS}/spolis_month_2014" ///
 		"${dSPOLIS}/spolis_month_2015" "${dSPOLIS}/spolis_month_2016" ///
 		"${dSPOLIS}/spolis_month_2017" "${dSPOLIS}/spolis_month_2018" ///
 		"${dSPOLIS}/spolis_month_2019" "${dSPOLIS}/spolis_month_2020" ///
 		"${dSPOLIS}/spolis_month_2021" "${dSPOLIS}/spolis_month_2022" ///
 		"${dSPOLIS}/spolis_month_2023" "${dSPOLIS}/spolis_month_2024"
+	
+	// Job tenure
+	// Fill missing job tenure before 2013 with later observed job starting date 
+	// within the same job (Observations starting with 2013).
+	// Assign earliest observed job starting date if multiple existing dates within
+	// slbaanid.
+	gegen min = min(job_tenure), by(rinpersoon slbaanid)
+	replace job_tenure = min if job_tenure==. | (job_tenure>min & job_tenure!=.)
+	drop min
+	// Fill missing job tenure before 2013 with earliest observed job starting
+	// date within the same job (Jobs observed before 2013)
+	gegen min = min(job_start_caly), by(rinpersoon slbaanid)
+	replace job_tenure = min if job_tenure==.
+	drop min
+	// Code as missing if assigned 01-01-2006 (this date is assigned if starting
+	// date is left-censored)
+	replace job_tenure = . if job_tenure==16802
 
 	order ikvid, after(baanrugid)
+
+	gsort rinpersoon year slbaanid
 	
 	// Labels
 	labels_nidio, module(spolis)
@@ -477,3 +477,4 @@
 	*	
 	
 	clear
+
