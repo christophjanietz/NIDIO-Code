@@ -1,19 +1,20 @@
 /*=============================================================================* 
 * DATA PREPARATION - NEA
 *==============================================================================*
- 	Project: NIDIO
+ 	Project: Beyond Boardroom / NIDIO
 	Author: Christoph Janietz (c.janietz@rug.nl)
-	Last update: 09-04-2025
+	Last update: 05-12-2025
 * ---------------------------------------------------------------------------- *
 
 	INDEX: 
+		0.  SETTINGS 
 		1. 	NEA OCCUPATION
 		
 * Short description of output:
 *
 * - Occupation codes based on NEA 2006-2023
 *
-* nidio_nea_occ_2006_2023: 
+* nea_occ_2006_2023: 
 * Respondent's occupation (ISCO-08) as collected by NEA survey. Before 2011, NEA
 * collected occupations only based on an idiosyncratic questionnaire item. 
 * Starting from 2011, ISCO-08 are available (Unit: RIN-years).
@@ -27,7 +28,7 @@
 	import spss using "${nea0513}", case(lower) clear
 	
 	* Select variables
-	keep rinpersoon jaar weeg beroep isco08_unitgroup
+	keep rinpersoon jaar weeg beroep isco08_unitgroup afl_sbi_2008
 	
 	* Remove years before 2006
 	drop if jaar<2006
@@ -37,9 +38,11 @@
 	rename beroep rin_neaocc
 	rename isco08_unitgroup rin_ISCO08
 	rename weeg rin_weight_NEA // proportional weight (relative to other respondents)
+	tostring afl_sbi_2008, gen(nea_SBI08) // Transform sbi code to string
 	
 	* Variable order
 	order rinpersoon, after(year)
+	order nea_SBI08, after(rin_neaocc)
 	
 	gsort year rinpersoon
 	
@@ -52,12 +55,13 @@
 	import spss using "${nea1423}", case(lower) clear
 	
 	* Select variables
-	keep rinpersoon jaar weeg isco08_unitgroup
+	keep rinpersoon jaar weeg isco08_unitgroup afl_sbi_2008
 	
 	* Simplify variable names
 	rename jaar year
 	rename isco08_unitgroup rin_ISCO08
 	rename weeg rin_weight_NEA // proportional weight (relative to other respondents)
+	rename afl_sbi_2008 nea_SBI08
 	
 	* Create empty NEA occupation variable
 	gen rin_neaocc = .
@@ -66,7 +70,7 @@
 	order rinpersoon, after(year)
 	order rin_weight_NEA, after(rinpersoon) 
 	order rin_neaocc, after(rin_ISCO08)
-	
+	order nea_SBI08, after(rin_neaocc)
 	
 	// Append files to create yearly NEA occupation database 2006-2023
 	append using "${dNEA}/temp_occ_0613"
@@ -82,9 +86,7 @@
 	
 	gsort year rinpersoon
 	
-	save "${dNEA}/nidio_nea_occ_2006_2023", replace	
+	save "${dNEA}/nidio_nea_occ_2006_2023", replace
 	
 	*Delete temporary files
 	erase "${dNEA}/temp_occ_0613.dta"
-	
-	clear
